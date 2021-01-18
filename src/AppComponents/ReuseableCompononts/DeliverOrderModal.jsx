@@ -23,7 +23,7 @@ export default function DeliverOrderModal() {
                         </div>
                         <div className="modal-body">
                             <div className="form-group">
-                                <label for="exampleInputEmail1" style={{fontSize: '0.7em', fontWeight: 'bold'}}>
+                                <label htmlFor="exampleInputEmail1" style={{fontSize: '0.7em', fontWeight: 'bold'}}>
                                     Delivery Man Code
                                 </label>
                                 <input type="email" className="form-control" placeholder="enter delivery" />
@@ -31,7 +31,7 @@ export default function DeliverOrderModal() {
                             <div className="form-group mt-4">
                                 <button
                                     type="button"
-                                    style={{backgroundColor: '#ff7417', color: 'white'}}
+                                    style={{backgroundColor: '#B02121', color: 'white'}}
                                     className="btn btn-warning">
                                     Send
                                 </button>

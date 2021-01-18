@@ -105,19 +105,19 @@ export default function EditProfile() {
             {loading ? <Preloader /> : (
                 <div className="user-dashboard mt-5 container bg-white p-2">
                 <div className="form-group">
-                    <label for="first_name" style={{fontSize: '0.7em', fontWeight: 'bold'}}>
+                    <label htmlFor="first_name" style={{fontSize: '0.7em', fontWeight: 'bold'}}>
                         First Name
                     </label>
                     <input onChange={onChangeHandler} value={formData.first_name} name="first_name" id="first_name" type="text" className="form-control" />
                 </div>
                 <div className="form-group">
-                    <label for="last_name" style={{fontSize: '0.7em', fontWeight: 'bold'}}>
+                    <label htmlFor="last_name" style={{fontSize: '0.7em', fontWeight: 'bold'}}>
                         Last Name
                     </label>
                     <input onChange={onChangeHandler} name="last_name" value={formData.last_name} id="last_name" type="text" className="form-control" />
                 </div>
                 <div className="form-group">
-                    <label style={{fontSize: '0.7em', fontWeight: 'bold'}} for="title">Title</label>
+                    <label style={{fontSize: '0.7em', fontWeight: 'bold'}} htmlFor="title">Title</label>
                     <select onChange={onChangeHandler} value={formData.title} id="title" name="title" onChange={e => onChangeHandler(e)} className="form-control" id="title">
                         <option value="mr">Mr</option>
                         <option value="mrs">Mrs</option>
@@ -125,14 +125,14 @@ export default function EditProfile() {
                     </select>
                 </div>
                 <div className="form-group">
-                    <label for="number" style={{fontSize: '0.7em', fontWeight: 'bold'}}>
+                    <label htmlFor="number" style={{fontSize: '0.7em', fontWeight: 'bold'}}>
                         Phone Number
                     </label>
                     <input  onChange={onChangeHandler} value={formData.phone} name="phone" id="number" type="number" className="form-control" />
                 </div>
                 <div className="custom-file">
                     <input accept="image/*" onChange={onImageChange} type="file" className="custom-file-input" id="image" />
-                    <label className="custom-file-label" for="image" style={{fontSize: '1em', opacity: '0.8'}}>
+                    <label className="custom-file-label" htmlFor="image" style={{fontSize: '1em', opacity: '0.8'}}>
                         Choose Profile Avatar
                     </label>
                 </div>
@@ -149,7 +149,7 @@ export default function EditProfile() {
                         type="submit"
                         onClick={onSubmitHandle}
                         className="btn btn-block"
-                        style={{color: 'white', backgroundColor: ' #ff7417'}}>
+                        style={{color: 'white', backgroundColor: ' #B02121'}}>
                         UPDATE PROFILE
                     </button>
                 </div>

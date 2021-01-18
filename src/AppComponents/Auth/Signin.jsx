@@ -8,7 +8,7 @@ export default function SignIn(props) {
     const dispatch = useDispatch();
 
     const userSignin = useSelector(state => state.userSignin);
-    const {loading, user, error} = userSignin;
+    const {loading, error} = userSignin;
     const [formData, setFormData] = useState({
         identifier: '',
         password: ''
@@ -36,12 +36,12 @@ export default function SignIn(props) {
         <div>
             <HeaderNav />
             <div className="login container" style={{display: "flex", justifyContent: "center", alignItems: "center", width: "100%", height: "90vh"}}>
-            <div className="card border-0 shadow " style={{backgroundColor: '#ff7417', width: "60%"}}>
+            <div className="card border-0 shadow " style={{backgroundColor: '#B02121', width: "60%"}}>
                 <div className="card-body">
                     <from>
                         <div className="from-row">
                             <div className="form-group col-md-12">
-                                <label style={styles.label} for="inputCity">
+                                <label style={styles.label} htmlFor="inputCity">
                                     Email
                                 </label>
                                 <input
@@ -58,7 +58,7 @@ export default function SignIn(props) {
                                 {error && <p style={styles.formError}>{error.errors.username}</p>}
                             </div>
                             <div className="form-group col-md-12">
-                                <label style={styles.label} for="inputCity">
+                                <label style={styles.label} htmlFor="inputCity">
                                     Password
                                 </label>
                                 <input

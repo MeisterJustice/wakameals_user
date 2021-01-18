@@ -352,14 +352,14 @@ const Checkout = (props) => {
                                 <div className="col-lg-1"/>
                                 <div onClick={() => setSelected("door_delivery")} style={{border: "1px solid gray", backgroundColor: selected === "door_delivery" ? "#ffeee3" : "white"}} className="col-lg-5 cursor mr-lg-1">
                                     <div className="p-1">
-                                        <h6 style={{color: "#ff7417"}}>Deliver to me</h6>
+                                        <h6 style={{color: "#B02121"}}>Deliver to me</h6>
                                         <hr className="mt-2" />
                                         <div className="mt-2">
                                             <div style={{fontSize: "13px"}}>
-                                                <MdPerson style={{color: "#ff7417", fontSize: "15px"}}/>{`   ${user.title} ${user.first_name} ${user.last_name}`}
+                                                <MdPerson style={{color: "#B02121", fontSize: "15px"}}/>{`   ${user.title} ${user.first_name} ${user.last_name}`}
                                             </div>
                                             <div className="mt-2" style={{fontSize: "13px"}}>
-                                                <MdPhoneAndroid style={{color: "#ff7417", fontSize: "15px"}}/>{`   ${user.phone}`}
+                                                <MdPhoneAndroid style={{color: "#B02121", fontSize: "15px"}}/>{`   ${user.phone}`}
                                             </div>
                                             <div className="my-3">
                                                 <input
@@ -376,11 +376,11 @@ const Checkout = (props) => {
                                 </div>
                                 <div onClick={handleClickOpen} style={{border: "1px solid gray", backgroundColor: selected === "pickup" ? "#ffeee3" : "white"}} className="col-lg-5 cursor ml-lg-1 mt-3 mt-lg-0">
                                     <div className="p-1">
-                                        <h6 style={{color: "#ff7417"}}>Select Pickup Location</h6>
+                                        <h6 style={{color: "#B02121"}}>Select Pickup Location</h6>
                                         <hr className="mt-2" />
                                         <div className="mt-2">
                                             <div style={{fontSize: "13px"}}>
-                                                <MdHome style={{color: "#ff7417", fontSize: "15px"}}/>{`   ${pickupLocation.location}`}
+                                                <MdHome style={{color: "#B02121", fontSize: "15px"}}/>{`   ${pickupLocation.location}`}
                                             </div>
                                         </div>
                                     </div>
@@ -406,7 +406,7 @@ const Checkout = (props) => {
                             </div>
                             {checked && (
                                 <div className="mt-3">
-                                    <h6 style={{color: "#ff7417"}}>Choose delivery days</h6>
+                                    <h6 style={{color: "#B02121"}}>Choose delivery days</h6>
                                     <hr className="mt-2" />
                                     {days.map((data, index) => (
                                         <div className="mt-1 p-1" style={{display: "flex", alignItems: "center", border: "1px solid gray"}}>
@@ -427,7 +427,7 @@ const Checkout = (props) => {
                                         </div>
                                     ))}
                                     <div className="mt-2">
-                                        <h6 style={{color: "#ff7417"}}>Choose delivery times (7:05 AM to 5:15 PM</h6>
+                                        <h6 style={{color: "#B02121"}}>Choose delivery times (7:05 AM to 5:15 PM</h6>
                                         <div style={{fontSize: "13px"}}>First Time (Leave empty if not applicable)</div>
                                         <input
                                             name="first_time"
@@ -456,7 +456,7 @@ const Checkout = (props) => {
                             ) : (
 
                             <div className="mt-3">
-                                <button onClick={onSubmit} className="btn btn-lg btn-block" style={{backgroundColor: "#ff7417", border: "none", color: "white"}}>CONTINUE TO ORDER</button>
+                                <button onClick={onSubmit} className="btn btn-lg btn-block" style={{backgroundColor: "#B02121", border: "none", color: "white"}}>CONTINUE TO ORDER</button>
                             </div>
                             )}
                         </div>
@@ -472,7 +472,7 @@ const Checkout = (props) => {
                 aria-describedby="alert-dialog-cart"
             >
                 <DialogTitle id="alert-dialog-title">
-                    <h6 style={{color: '#ff7417'}} className="modal-title" id="exampleModalCenterTitle">
+                    <h6 style={{color: '#B02121'}} className="modal-title" id="exampleModalCenterTitle">
                         Select Location
                     </h6>
                 </DialogTitle>
@@ -488,7 +488,7 @@ const Checkout = (props) => {
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                <Button onClick={handleClose} style={{color: "#ff7417", fontWeight: "550"}}>
+                <Button onClick={handleClose} style={{color: "#B02121", fontWeight: "550"}}>
                     CLOSE
                 </Button>
                 </DialogActions>
@@ -508,7 +508,7 @@ const Checkout = (props) => {
                 <DialogContent>
                     <DialogContentText id="alert-dialog-cart">                                
                         <div style={{display: "flex", justifyContent: "center", alignItems: "center"}} className="mt-3">
-                            <button className="btn btn-lg btn-block" style={{backgroundColor: "#ff7417", border: "none", color: "white", fontWeight: "bold"}} onClick={() => {
+                            <button className="btn btn-lg btn-block" style={{backgroundColor: "#B02121", border: "none", color: "white", fontWeight: "bold"}} onClick={() => {
                                 initializePayment(onSuccess, onClose)
                             }}>CONTINUE TO PAYMENT</button>
                         </div>

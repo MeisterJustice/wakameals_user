@@ -109,7 +109,7 @@ export default function OpenOder() {
                         )}
                     </div>
                     ) : (
-                        <div style={{fontWeight: "bold", color: "#ff7417"}} className="text-center">
+                        <div style={{fontWeight: "bold", color: "#B02121"}} className="text-center">
                             NO ORDER
                         </div>
                     )}

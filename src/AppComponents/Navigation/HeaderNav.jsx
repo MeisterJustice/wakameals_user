@@ -79,14 +79,14 @@ export default function HeaderNav(props) {
                     {props.setOpen && props.home && (
                         <div className="nav-item cursor">
                             <div onClick={changeLocation} className="nav-link text-white">
-                                <MdAddLocation style={{color: "#ff7417", fontSize: "1.5em"}}/> change location
+                                <MdAddLocation style={{color: "#B02121", fontSize: "1.5em"}}/> change location
                             </div>
                         </div>
                     )}
                     {!props.cart && (
                         <Link to="/cart" className="nav-item">
                             <a className="nav-link text-white">
-                                <MdShoppingCart style={{color: "#ff7417", fontSize: "1.5em"}}/> {cart} items
+                                <MdShoppingCart style={{color: "#B02121", fontSize: "1.5em"}}/> {cart} items
                             </a>
                         </Link>
                     )}
