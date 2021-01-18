@@ -24,22 +24,22 @@ const Meal = (props) => {
         setOpenCart(false);
     };
     return (
-        <div className="bg-white p-2 mt-2">
-            <div>
-                <p className="food-list-name">{props.meal.name}</p>
+        <div className="bg-white mt-4">
+            <div className="mt-4">
                 <div className="row">
                     <div className="col-7 col-md-8">
                         <div className="row">
-                            <div className="col-lg-5">
+                            <div className="col-lg-3">
                                 
                                 <img
                                      alt="photo"
-                                    style={{width: '150px', height: '100px'}}
+                                    style={{width: '90px', height: '90px'}}
                                     src={props.meal.image}
                                 />
                             </div>
-                            <div className="col-lg-7">
-                                <p>{parse(props.meal.description.substring(0, 25))}...</p>
+                            <div style={{width: "100%"}} className="col-lg-9">
+                                <div className="food-desc">{props.meal.name}</div>
+                                <div className="food-desc mute mt-1">{parse(props.meal.description.substring(0, 35))}</div>
                                 <button 
                                     className="btn btn-style btn-sm"
                                     onClick={handleClickOpen}
@@ -59,6 +59,7 @@ const Meal = (props) => {
                     </div>
                 </div>
             </div>
+            <hr className="py-2" />
             <ItemDetail handleClose={handleClose} open={open} meal={props.meal} />
             <AddToCart handleClose={handleCloseCart} open={openCart} notifySuccess={props.notifySuccess} handleAddCart={props.handleAddCart} person={props.person} meal={props.meal} />
         </div>

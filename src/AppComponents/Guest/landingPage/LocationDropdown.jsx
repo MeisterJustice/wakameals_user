@@ -6,7 +6,7 @@ const LocationDropdown = (props) => {
     const onChange = (e) => {
         setLoading(true)
         if(e.target.name === "town"){
-            let selectedTown = props.town.towns.filter((town) => town.id == e.target.value)
+            let selectedTown = props.town.towns.filter((town) => town.id === e.target.value)
             let isAvailable = selectedTown[0].enabled
             if(isAvailable === "0"){
                 props.setOpenSuccess(false)
@@ -19,7 +19,7 @@ const LocationDropdown = (props) => {
             setLoading(false)
         }
         else if(e.target.name === "lga"){
-            let selectedLga = props.lga.lgas.filter((lga) => lga.id == e.target.value)
+            let selectedLga = props.lga.lgas.filter((lga) => lga.id === e.target.value)
             let isAvailable = selectedLga[0].enabled
             if(isAvailable === "0"){
                 props.setOpenSuccess(false)
@@ -42,7 +42,7 @@ const LocationDropdown = (props) => {
             })
         }
         else if(e.target.name === "state"){ 
-        let selectedState = props.state.states.filter((state) => state.id == e.target.value)
+        let selectedState = props.state.states.filter((state) => state.id === e.target.value)
         let isAvailable = selectedState[0].enabled
         if(isAvailable === "0"){
             props.setOpenSuccess(false)
@@ -79,7 +79,7 @@ const LocationDropdown = (props) => {
                 </div>
             ) : (
                 <div>
-                    <label for="locationDropdown" className="white">{props.state.isAvailable ? props.lga.isAvailable ? "Town" : "LGA" : "State"}</label>
+                    <label htmlFor="locationDropdown" className="white">{props.state.isAvailable ? props.lga.isAvailable ? "Town" : "LGA" : "State"}</label>
                     {props.state.isAvailable !== true && (
                         <select className="form-control cursor" onChange={onChange} name="state">
                             <option value="">Pick a state...</option>

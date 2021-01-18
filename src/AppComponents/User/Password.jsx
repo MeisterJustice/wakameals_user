@@ -65,13 +65,13 @@ export default function Password(props) {
                 pauseOnHover
             />
             <div className="login container" style={{display: "flex", justifyContent: "center", alignItems: "center", width: "100%", height: "90vh"}}>
-            <div className="card border-0 shadow " style={{backgroundColor: '#ff7417', width: "60%"}}>
+            <div className="card border-0 shadow " style={{backgroundColor: '#B02121', width: "60%"}}>
                 <div className="card-body">
                     <from>
                         <div className="from-row">
                         
                             <div className="form-group col-md-12">
-                                <label style={styles.label} for="current_password">
+                                <label style={styles.label} htmlFor="current_password">
                                     Current Password
                                 </label>
                                 <input
@@ -84,7 +84,7 @@ export default function Password(props) {
                                 />
                             </div>
                             <div className="form-group col-md-12">
-                                <label style={styles.label} for="new_password">
+                                <label style={styles.label} htmlFor="new_password">
                                     New Password
                                 </label>
                                 <input
@@ -97,7 +97,7 @@ export default function Password(props) {
                                 />
                             </div>
                             <div className="form-group col-md-12">
-                                <label style={styles.label} for="retype_new_password">
+                                <label style={styles.label} htmlFor="retype_new_password">
                                     Confirm New Password
                                 </label>
                                 <input

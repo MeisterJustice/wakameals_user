@@ -7,8 +7,13 @@ import SuccessModal from './SuccessModal';
 import WelcomeModal from './WelcomeModal';
 import {useSelector, useDispatch} from 'react-redux';
 import Preloader from '../../ReuseableCompononts/Preloader';
+import { FaArrowCircleDown, FaArrowCircleUp, FaTable, FaUtensils, FaUtensilSpoon } from "react-icons/fa"
 import { ToastContainer, toast } from 'react-toastify';
   import 'react-toastify/dist/ReactToastify.css';
+import Bg from './Bg';
+import CatItems from './CatItems';
+import Footer from '../../Navigation/Footer';
+
 
 export default function LandingPage(props) {
     const dispatch = useDispatch();
@@ -30,6 +35,11 @@ export default function LandingPage(props) {
     const [initialCart, setInitialCart] = useState([])
     const [finish, setFinish] = useState(false)
     const [cartSize, setCartSize] = useState(0)
+    const [tabValue, setTabValue] = React.useState(0);
+    const [categoryTab, setCategoryTab] = useState(false)
+    const handleChangeTab = (event, newValue) => {
+        setTabValue(newValue);
+    };
 
     const notifySuccess = (text) => toast.success(text);
     const notifyWarning = (text) => toast.warning(text);
@@ -131,7 +141,7 @@ export default function LandingPage(props) {
     }, [success])
 
     return (
-        <div>
+        <div id="home-screen">
             <HeaderNav cartSize={cartSize} home={true} setSuccess={setSuccess} setOpen={setOpen}/>
             <ToastContainer
                 position="top-right"
@@ -144,7 +154,8 @@ export default function LandingPage(props) {
                 draggable
                 pauseOnHover
             />
-            {!finish && (
+            <Bg />
+            {/* {!finish && (
                 <div>
                     {states.length > 0 && !openFail && !openSuccess && open && (
                         <WelcomeModal setSuccess={setSuccess} open={open} openFail={openFail} setOpenFail={setOpenFail} openSuccess={openSuccess} setOpenSuccess={setOpenSuccess} setOpen={setOpen} states={states} {...props} />
@@ -156,15 +167,41 @@ export default function LandingPage(props) {
                         <SuccessModal notifySuccess={notifySuccess} location={location} setSuccess={setSuccess} open={open} openFail={openFail} setOpenFail={setOpenFail} openSuccess={openSuccess} setOpenSuccess={setOpenSuccess} setOpen={setOpen} />
                     )}
                 </div>
-            )}
-            <div>
+            )} */}
+            <div id="meals">
                 {/* <!--============ THE FOOD LISTING ==========--> */}
                 <div style={{width: "100%"}} className="container">
                     <h4 className="mt-3 text-center" style={{color: "white"}}>{success ? persons.length > 1 ? `For ${person}` : `For Person ${step}` : ""}</h4>
                     <div className="row">
                         <div className="col-12">
                             {meals.length > 0 ? (
-                                <FoodMenu notifySuccess={notifySuccess} handleAddCart={handleAddCart} person={person} meals={meals} />
+                                <div className="row">
+                                    <div className="col-lg-2">
+                                        <div className="d-none d-lg-block">
+                                            <h6><FaUtensils /> Categories</h6>
+                                            <CatItems meals={meals} />
+                                        </div>
+                                        <div className="d-lg-none pb-3">
+                                            <div onClick={() => setCategoryTab(!categoryTab)} style={{width: "100%"}} className="bg-white cursor p-2 d-flex justify-content-around align-items-center">
+                                               <div style={{color: "gray"}}>Categories</div>
+                                               <div>{categoryTab ? <FaArrowCircleUp color="gray" /> : <FaArrowCircleDown color="gray" /> }</div>
+                                            </div>
+                                            {categoryTab && <CatItems meals={meals} />}
+                                        </div>
+                                    </div>
+                                    <div className="col-lg-10">
+                                        <div className="d-flex justify-content-start align-items-center pb-3">
+                                            <div className="py-3 px-5 cursor" style={{fontWeight: "bold", color: tabValue === 0 ? "#B02121" : "gray", backgroundColor: tabValue === 0 ? "white" : "transparent"}} onClick={(e) => handleChangeTab(e, 0)}><FaUtensilSpoon />  Menu</div>
+                                            <div className="py-3 px-5 cursor" style={{fontWeight: "bold", color: tabValue === 1 ? "#B02121" : "gray", backgroundColor: tabValue === 1 ? "white" : "transparent"}} onClick={(e) => handleChangeTab(e, 1)}><FaTable />  Book a Table</div>
+                                        </div>
+                                        {tabValue === 0 && (
+                                            <FoodMenu notifySuccess={notifySuccess} handleAddCart={handleAddCart} person={person} meals={meals} />
+                                        )}
+                                        {tabValue === 1 && (
+                                            <div style={{height: "500px"}}>jj</div>
+                                        )}
+                                    </div>
+                                </div>
                             ) : (
                                 <Preloader />
                             )}
@@ -182,6 +219,7 @@ export default function LandingPage(props) {
                     </div>
                 </div>
             </div>
+            <Footer />
         </div>
     );
 }

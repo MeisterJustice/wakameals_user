@@ -8,7 +8,7 @@ export default function SignUp(props) {
     const dispatch = useDispatch();
 
     const userSignin = useSelector(state => state.userSignin);
-    const {loading, user, error} = userSignin;
+    const {loading, error} = userSignin;
     const [formData, setFormData] = useState({
         email: '',
         password: '',
@@ -40,12 +40,12 @@ export default function SignUp(props) {
         <div>
             <HeaderNav />
             <div className="login container" style={{display: "flex", justifyContent: "center", alignItems: "center", width: "100%", paddingTop: "50px", paddingBottom: "50px"}}>
-            <div className="card border-0 shadow " style={{backgroundColor: '#ff7417', width: "60%"}}>
+            <div className="card border-0 shadow " style={{backgroundColor: '#B02121', width: "60%"}}>
                 <div className="card-body">
                     <from>
                         <div className="from-row">
                             <div className="form-group col-md-12">
-                                <label style={styles.label} for="first_name">
+                                <label style={styles.label} htmlFor="first_name">
                                     First Name
                                 </label>
                                 <input
@@ -59,7 +59,7 @@ export default function SignUp(props) {
                                 {error && <p style={styles.formError}>{error.errors.first_name}</p>}
                             </div>
                             <div className="form-group col-md-12">
-                                <label style={styles.label} for="last_name">
+                                <label style={styles.label} htmlFor="last_name">
                                     Last Name
                                 </label>
                                 <input
@@ -73,15 +73,15 @@ export default function SignUp(props) {
                                 {error && <p style={styles.formError}>{error.errors.last_name}</p>}
                             </div>
                             <div className="form-group col-md-12">
-                                <label style={styles.label} for="title">Title</label>
-                                <select id="title" name="title" onChange={e => onChangeHandler(e)} className="form-control" id="title">
+                                <label style={styles.label} htmlFor="title">Title</label>
+                                <select value={title} id="title" name="title" onChange={e => onChangeHandler(e)} className="form-control" id="title">
                                     <option value="Mr">Mr</option>
                                     <option value="Ms">Ms</option>
                                 </select>
                                 {error && <p style={styles.formError}>{error.errors.title}</p>}
                             </div>
                             <div className="form-group col-md-12">
-                                <label style={styles.label} for="number">
+                                <label style={styles.label} htmlFor="number">
                                     Phone Number
                                 </label>
                                 <input
@@ -95,7 +95,7 @@ export default function SignUp(props) {
                                 {error && <p style={styles.formError}>{error.errors.phone}</p>}
                             </div>
                             <div className="form-group col-md-12">
-                                <label style={styles.label} for="email">
+                                <label style={styles.label} htmlFor="email">
                                     Email
                                 </label>
                                 <input
@@ -112,7 +112,7 @@ export default function SignUp(props) {
                                 {error && <p style={styles.formError}>{error.errors.username}</p>}
                             </div>
                             <div className="form-group col-md-12">
-                                <label style={styles.label} for="password">
+                                <label style={styles.label} htmlFor="password">
                                     Password
                                 </label>
                                 <input

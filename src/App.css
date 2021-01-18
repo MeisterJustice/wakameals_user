@@ -15,7 +15,7 @@ body {
 }
 
 .navbar li a:hover {
-  color: #ff7417 !important;
+  color: #B02121 !important;
 }
 
 .navbar .mdi {
@@ -26,7 +26,7 @@ body {
 /* *========== THE FOOD LISTING======= */
 
 .food-list-accordion {
-  background: #ff7417;
+  background: #B02121;
   color: #fff;
   margin-bottom: 5px;
   margin-top: 2rem;
@@ -43,8 +43,12 @@ body {
   color: #000000;
 }
 
-.food-list-name {
-  font-weight: bold;
+.food-desc {
+  font-size: 15px;
+}
+
+.mute {
+  color: gray;
 }
 
 .modal-btn {
@@ -65,13 +69,13 @@ body {
 }
 
 .btn-style {
-  color: #ff7417;
-  border: 1px #ff7417 solid;
+  color: #B02121;
+  border: 1px #B02121 solid;
   font-size: smaller;
 }
 
 .btn-style:hover {
-  color: #ff7417;
+  color: #B02121;
 }
 
 .my-text h2 {
@@ -90,7 +94,7 @@ body {
 }
 
 .card-head {
-  background: #ff7417;
+  background: #B02121;
   color: #fff;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -102,7 +106,7 @@ body {
 }
 
 .btn-pay {
-  background: #ff7417;
+  background: #B02121;
   color: #fff;
   border: none;
 }
@@ -124,13 +128,139 @@ body {
 }
 .card-hover {
   width: 100%;
-  background-color: #ff7417;
+  background-color: #B02121;
   color: white;
 }
 
 .hover-location:hover {
-  background-color: #ff7417;
+  background-color: #B02121;
   color: white;
   transition: 0.2s all ease;
   border: none;
+}
+
+
+#bgImage {
+  margin: 0;
+  height: 90vh;
+  width: 90wh;
+  background: url(http://wakameals.com/wp-content/uploads/2018/10/single-foodbakery-demo.jpg) no-repeat center / cover;
+}
+
+.bg-wrapper {
+  height: 100%;
+  color: white;
+}
+
+.bg-wrapper h1 div {
+  font-size: 40px;
+}
+
+@media only screen and (max-width: 600px) {
+  .bg-wrapper h1 div {
+    font-size: 30px;
+  }
+}
+.icon-wrapper1 {
+  background-color:rgba(45, 126, 216, 0.5);
+  border-radius: 50px;
+  box-shadow: 0 0 0 4px rgba(45, 126, 216, 0.2);
+  padding: 15px;
+  cursor: pointer;
+  position: relative;
+}
+
+.icon-wrapper2 {
+  background-color:rgba(233, 47, 43, 0.5);
+  border-radius: 50px;
+  box-shadow: 0 0 0 4px rgba(246, 72, 68, 0.2);
+  padding: 15px;
+  cursor: pointer;
+  position: relative;
+}
+
+.icon-wrapper3 {
+  background-color:rgba(97, 218, 0, 0.5);
+  border-radius: 50px;
+  box-shadow: 0 0 0 4px rgba(150, 235, 65, 0.2);
+  padding: 15px;
+  cursor: pointer;
+  position: relative;
+}
+
+.muted {
+  font-size: 13px;
+  color: rgb(245, 244, 244);
+  position: absolute;
+  top: 65%;
+  padding-right: 5px;
+  padding-left: 5px;
+  border-radius: 20px;
+}
+
+.muted1 {
+  background-color:rgba(45, 126, 216, 0.5);
+}
+.muted2 {
+  background-color:rgba(233, 47, 43, 0.5);
+}
+.muted3 {
+  background-color:rgba(97, 218, 0, 0.5);
+}
+
+.order-now {
+  height: 120px;
+  background-color: #B02121;
+}
+
+.cat-title {
+  color: #B02121;
+  text-decoration: underline;
+  line-height: 1.5;
+}
+
+.cat-name {
+  font-size: 13px;
+  color: gray;
+  text-decoration: none;
+}
+
+.cat-name:hover {
+  color: #B02121;
+  transition: .5s all ease;
+}
+
+#home-screen {
+  background-color: #EBEDF3;
+  margin: 0;
+}
+
+#meals {
+  padding-top: 50px;
+}
+
+.footer {
+  font-size: 15px;
+  color: white;
+}
+.footer1 {
+  font-size: 15px;
+  color: #B02121;
+}
+
+@media only screen and (max-width: 400px) {
+  .muted {
+    top: 61%;
+  }
+  .order-now {
+    height: 210px;
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .order-now {
+    height: 250px;
+    width: 100%;
+  }
 }
