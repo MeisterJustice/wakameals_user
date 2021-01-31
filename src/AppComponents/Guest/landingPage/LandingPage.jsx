@@ -13,6 +13,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import Bg from './Bg';
 import CatItems from './CatItems';
 import Footer from '../../Navigation/Footer';
+import BookTable from './BookTable';
 
 
 export default function LandingPage(props) {
@@ -113,9 +114,9 @@ export default function LandingPage(props) {
             setOpenSuccess(true)
             setOpen(false)
         } 
-        Axios.get("https://server.wakameals.validprofits.xyz/api/state/list")
+        Axios.get("https://server.wakameals.validprofits.xyz/api/place/list")
         .then((res) => {
-            setStates(res.data.states)
+            setStates(res.data.places)
         })
 
         Axios.get("https://server.wakameals.validprofits.xyz/api/meal/list")
@@ -155,7 +156,7 @@ export default function LandingPage(props) {
                 pauseOnHover
             />
             <Bg />
-            {/* {!finish && (
+            {!finish && (
                 <div>
                     {states.length > 0 && !openFail && !openSuccess && open && (
                         <WelcomeModal setSuccess={setSuccess} open={open} openFail={openFail} setOpenFail={setOpenFail} openSuccess={openSuccess} setOpenSuccess={setOpenSuccess} setOpen={setOpen} states={states} {...props} />
@@ -167,11 +168,11 @@ export default function LandingPage(props) {
                         <SuccessModal notifySuccess={notifySuccess} location={location} setSuccess={setSuccess} open={open} openFail={openFail} setOpenFail={setOpenFail} openSuccess={openSuccess} setOpenSuccess={setOpenSuccess} setOpen={setOpen} />
                     )}
                 </div>
-            )} */}
+            )}
             <div id="meals">
                 {/* <!--============ THE FOOD LISTING ==========--> */}
                 <div style={{width: "100%"}} className="container">
-                    <h4 className="mt-3 text-center" style={{color: "white"}}>{success ? persons.length > 1 ? `For ${person}` : `For Person ${step}` : ""}</h4>
+                    <h4 className="py-5 text-center" style={{color: "#B02121"}}>{success ? persons.length > 1 ? `For ${person}` : `For Person ${step}` : ""}</h4>
                     <div className="row">
                         <div className="col-12">
                             {meals.length > 0 ? (
@@ -198,21 +199,22 @@ export default function LandingPage(props) {
                                             <FoodMenu notifySuccess={notifySuccess} handleAddCart={handleAddCart} person={person} meals={meals} />
                                         )}
                                         {tabValue === 1 && (
-                                            <div style={{height: "500px"}}>jj</div>
+                                            <BookTable notifySuccess={notifySuccess} notifyWarning={notifyWarning} token={token} />
                                         )}
+                                        <div className="mt-4 pb-5">
+                                            {persons.length > 1 && step !== persons.length && (
+                                                <button onClick={changePerson} className="btn btn-style btn-lg">NEXT PERSON</button>
+                                            )}
+                                            {persons.length === 1 && step < numberOfPersons.length && (
+                                                <button onClick={changePerson1} className="btn btn-style btn-lg">NEXT PERSON</button>
+                                            )}
+                                        </div>
                                     </div>
                                 </div>
                             ) : (
                                 <Preloader />
                             )}
-                            <div className="mt-3 pb-5">
-                                {persons.length > 1 && step !== persons.length && (
-                                    <button onClick={changePerson} className="btn btn-style btn-lg">NEXT PERSON</button>
-                                )}
-                                {persons.length === 1 && step < numberOfPersons.length && (
-                                    <button onClick={changePerson1} className="btn btn-style btn-lg">NEXT PERSON</button>
-                                )}
-                            </div>
+                            
                         </div>
 
                         
