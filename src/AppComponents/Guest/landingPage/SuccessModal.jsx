@@ -23,6 +23,7 @@ const SuccessModal = (props) => {
     const [number, setNumber] = useState(1)
     const [names, setNames] = useState({})
     const [numberOfPersons, setNumberOfPersons] = useState([])
+    const [isoptionAvailable, setIsoptionAvailable] = useState(false);
 
     const cancel = () => {
             localStorage.removeItem("names")
@@ -61,6 +62,20 @@ const SuccessModal = (props) => {
         })
     }
 
+    const option = (option) => {
+        localStorage.setItem("deliveryOption", JSON.stringify(option))
+        setIsoptionAvailable(true)
+    }
+
+    const option2 = (option) => {
+        if(option === "continue") {
+            setStep(2)
+        } else {
+            props.setOpenSuccess(false)
+            props.setOpenFail(false)
+        }
+    }
+
     const done1 = () => {
         localStorage.setItem("names", JSON.stringify([Number(number)]))
         props.setSuccess(true)
@@ -75,12 +90,6 @@ const SuccessModal = (props) => {
         continue2()
     }
 
-    useEffect(() => {
-        if(props.location){
-            setStep(2)
-        }
-    }, [])
-
     const handleNumber = (e) => {
         setNumber(e.target.value)
     }
@@ -93,12 +102,22 @@ const SuccessModal = (props) => {
         >
             {step === 1 && (
                 <div>
-                    <div className="py-5 white">
-                        Congrats! We can deliver to your location, please click below to continue……
-                    </div>
-                    <div>
-                        <button onClick={() => setStep(2)} className="btn btn-sm modal-btn">Continue</button>
-                    </div>
+                    {!isoptionAvailable ? (
+                        <div>
+                            <div className="py-5 white">
+                                Wow! you are in luck, choose an option below……
+                            </div>
+                            <div className="d-flex justify-content-around align-items-center p-4">
+                                <button onClick={() => option("delivery")} className="btn btn-sm modal-btn">Delivery</button>
+                                <button onClick={() => option("pickup")} className="btn btn-sm modal-btn">Pickup</button>
+                            </div>
+                        </div>
+                    ) : (
+                        <div className="d-flex justify-content-around align-items-center p-5">
+                            <button onClick={() => option2("reset")} className="btn btn-sm modal-btn mr-2">Reset</button>
+                            <button onClick={() => option2("continue")} className="btn btn-sm modal-btn">Continue</button>
+                        </div>
+                    )}
                 </div>
             )}
             {step === 2 && (
@@ -116,11 +135,11 @@ const SuccessModal = (props) => {
             {step === 3 && number > 1 && (
                 <div>
                     <div className="py-3 white">
-                        Would you like to personalize your order?
+                        Click the button below to customise your orders
                     </div>
                     <div>
-                        <button onClick={done1} className="btn btn-primary mt-4">No</button>
-                        <button onClick={() => setStep(4)} className="btn modal-btn mt-4 ml-2">Yes</button>
+                        {/* <button onClick={done1} className="btn btn-primary mt-4">No</button> */}
+                        <button onClick={() => setStep(4)} className="btn modal-btn mt-4 ml-2">CUSTOMISE</button>
                     </div>
                 </div>
             )}

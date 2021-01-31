@@ -16,20 +16,10 @@ const customStyles = {
 
 
 const WelcomeModal = (props) => {
-    const [state, setState] = useState({
-        states: props.states,
-        state: "",
-        isAvailable: ""
-    })
-    const [lga, setLga] = useState({
-        lgas: [],
-        lga: "",
-        isAvailable: ""
-    })
-    const [town, setTown] = useState({
-        towns: [],
-        town: "",
-        isAvailable: ""
+    const [place, setPlace] = useState({
+        name: "",
+        slug: "",
+        id: ""
     })
     
 
@@ -37,16 +27,16 @@ const WelcomeModal = (props) => {
         props.setOpen(false)
         localStorage.removeItem("location")
         localStorage.setItem("location", JSON.stringify({
-            state: state.state,
-            lga: lga.lga,
-            town: town.town
+            name: place.name,
+            slug: place.slug,
+            id: place.id
         }))
         props.setOpenSuccess(true)
     }
 
     const onClose = () => {
         props.setOpen(false)
-        props.setSuccess(false)
+        props.setOpenSuccess(false)
     }
 
 
@@ -58,24 +48,18 @@ const WelcomeModal = (props) => {
                 style={customStyles}
                 contentLabel="Select Location"
             >
-                {/* <h5 className="text-right" onClick={() => props.setOpen(false)}>X</h5> */}
-                <h6 className="modal-title white" id="myLandingModalLabel">Welcome to Wakameals, please choose your delivery location</h6>
+                <h5 className="text-right" onClick={onClose}>X</h5>
+                <h6 className="modal-title white" id="myLandingModalLabel">Welcome to Wakameals, please choose your location</h6>
                 <div className="mt-3">
-                    <div>
-                        
-                        {state.isAvailable === true && lga.isAvailable === true && town.isAvailable === true && (
-                            <button onClick={onDone} className="ml-2 d-inline btn btn-sm modal-btn">select</button>
+                    <LocationDropdown {...props} openFail={props.openFail} setOpenFail={props.setOpenFail} openSuccess={props.openSuccess} setOpenSuccess={props.setOpenSuccess} place={place} setPlace={setPlace} />
+                    <div className="py-2">
+                        {place.name.length > 0 && (
+                            <div>
+                                <div>{place.name}</div>
+                                <button onClick={onDone} className="mt-1 d-inline btn btn-sm modal-btn">select</button>
+                            </div>
                         )}
                     </div>
-                    {state.isAvailable === false || lga.isAvailable === false || town.isAvailable === false ? (
-                        <div className="alert alert-danger my-2 white" role="alert">
-                            Sorry, we're currently not available for your location
-                        </div>
-                    ) : (
-
-                        <LocationDropdown openFail={props.openFail} setOpenFail={props.setOpenFail} openSuccess={props.openSuccess} setOpenSuccess={props.setOpenSuccess} state={state} lga={lga} town={town} setState={setState} setLga={setLga} setTown={setTown} />
-                    )
-                }
                 </div>
             </Modal>
         </div>

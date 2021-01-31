@@ -274,6 +274,9 @@ const Checkout = (props) => {
         let parsedToken = JSON.parse(token)
         let cart = localStorage.getItem("cart")
         let parsedCart = JSON.parse(cart)
+        let option = localStorage.getItem("deliveryOption")
+        let parsedOption = JSON.parse(option)
+        setSelected(parsedOption)
         setCart(parsedCart)
         Axios.get("https://server.wakameals.validprofits.xyz/api/profile/details", {
             headers: {
@@ -350,7 +353,7 @@ const Checkout = (props) => {
 
                             <div className="mt-2 row" >
                                 <div className="col-lg-1"/>
-                                <div onClick={() => setSelected("door_delivery")} style={{border: "1px solid gray", backgroundColor: selected === "door_delivery" ? "#ffeee3" : "white"}} className="col-lg-5 cursor mr-lg-1">
+                                <div onClick={() => setSelected("delivery")} style={{border: "1px solid gray", backgroundColor: selected === "delivery" ? "#ffeee3" : "white"}} className="col-lg-5 cursor mr-lg-1">
                                     <div className="p-1">
                                         <h6 style={{color: "#B02121"}}>Deliver to me</h6>
                                         <hr className="mt-2" />
