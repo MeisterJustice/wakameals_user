@@ -85,7 +85,8 @@ const Checkout = (props) => {
     const [pickupLocation, setPickupLocation] = useState({
         data: [],
         location: "",
-        code: ""
+        code: "",
+        place: ""
     })
     const [cart, setCart] = useState([])
     const [loading, setLoading] = useState(true)
@@ -106,8 +107,6 @@ const Checkout = (props) => {
         }
         let token = localStorage.getItem("token")
         let parsedToken = JSON.parse(token)
-        let location = localStorage.getItem("location")
-        let parsedLocation = JSON.parse(location)
         let cart = localStorage.getItem("cart")
         let parsedCart = JSON.parse(cart)
         var dates = []
@@ -144,7 +143,7 @@ const Checkout = (props) => {
         Axios.post("https://server.wakameals.validprofits.xyz/api/order/new", {
             delivery_type: selected,
             pickup_code: pickupLocation.code,
-            ...parsedLocation,
+            place: pickupLocation.place,
             address,
             recurring: checked,
             recurring_dates: dates,
@@ -269,7 +268,8 @@ const Checkout = (props) => {
 
     useEffect(() => {
         if(typeof props.location.query !== "undefined"){
-    
+            let location = localStorage.getItem("location")
+            let parsedLocation = JSON.parse(location)
         let token = localStorage.getItem("token")
         let parsedToken = JSON.parse(token)
         let cart = localStorage.getItem("cart")
@@ -303,7 +303,7 @@ const Checkout = (props) => {
                 phone: res.data.details.phone,
             })
         })
-        Axios.get("https://server.wakameals.validprofits.xyz/api/avail_pickup/list")
+        Axios.get(`https://server.wakameals.validprofits.xyz/api/avail_pickup/${parsedLocation.slug}/list`)
         .then((res) => {
             setPickupLocation({
                 ...pickupLocation,
@@ -318,8 +318,9 @@ const Checkout = (props) => {
     const handlePickup = (code, data) => {
         setPickupLocation({
             ...pickupLocation,
-            location: `${data.address}, ${data.town.name}, ${data.lga.name}, ${data.state.name}`,
-            code: code
+            location: `${data.address}, ${data.place.name}, ${data.name}`,
+            code: code,
+            place: data.place.id
         })
         setSelected("pickup")
         setOpen(false)
@@ -353,7 +354,7 @@ const Checkout = (props) => {
 
                             <div className="mt-2 row" >
                                 <div className="col-lg-1"/>
-                                <div onClick={() => setSelected("delivery")} style={{border: "1px solid gray", backgroundColor: selected === "delivery" ? "#ffeee3" : "white"}} className="col-lg-5 cursor mr-lg-1">
+                                <div onClick={() => setSelected("door_delivery")} style={{border: "1px solid gray", backgroundColor: selected === "door_delivery" ? "#ffeee3" : "white"}} className="col-lg-5 cursor mr-lg-1">
                                     <div className="p-1">
                                         <h6 style={{color: "#B02121"}}>Deliver to me</h6>
                                         <hr className="mt-2" />
@@ -482,9 +483,9 @@ const Checkout = (props) => {
                 <DialogContent>
                     <DialogContentText id="alert-dialog-cart">                                
                         <div>
-                            {pickupLocation.data.map((data, index) => (
-                                <div onClick={() => handlePickup(data.code, data)} style={{border: "1px gray solid", fontSize: "14px"}} className="p-2 hover-location cursor mt-2" >
-                                    {data.address}, {data.town.name}, {data.lga.name}, {data.state.name}
+                            {pickupLocation.data.map((data) => (
+                                <div key={data.id} onClick={() => handlePickup(data.code, data)} style={{border: "1px gray solid", fontSize: "14px"}} className="p-2 hover-location cursor mt-2" >
+                                    {data.address}, {data.place.name}, {data.name}
                                 </div>
                             ))}
                         </div>

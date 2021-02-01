@@ -108,7 +108,7 @@ const SuccessModal = (props) => {
                                 Wow! you are in luck, choose an option below……
                             </div>
                             <div className="d-flex justify-content-around align-items-center p-4">
-                                <button onClick={() => option("delivery")} className="btn btn-sm modal-btn">Delivery</button>
+                                <button onClick={() => option("door_delivery")} className="btn btn-sm modal-btn">Delivery</button>
                                 <button onClick={() => option("pickup")} className="btn btn-sm modal-btn">Pickup</button>
                             </div>
                         </div>

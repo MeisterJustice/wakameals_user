@@ -55,7 +55,7 @@ const WelcomeModal = (props) => {
                     <div className="py-2">
                         {place.name.length > 0 && (
                             <div>
-                                <div>{place.name}</div>
+                                <div className="text-white">{place.name}</div>
                                 <button onClick={onDone} className="mt-1 d-inline btn btn-sm modal-btn">select</button>
                             </div>
                         )}
