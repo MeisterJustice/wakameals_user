@@ -65,23 +65,23 @@ const BookTable = (props) => {
         })
     }, [])
     return (
-        <div style={{height: "500px"}}>
+        <div className="book p-3">
             <form onSubmit={submit}>
                 <div className="d-flex flex-column justify-content-between">
                     <label htmlFor="reserved_date">Date</label>
-                    <input onChange={handleChange} id="reserved_date" name="reserved_date" type="date" required />
+                    <input className="form-control" onChange={handleChange} id="reserved_date" name="reserved_date" type="date" required />
                 </div>
                 <div className="mt-2 d-flex flex-column justify-content-between">
                     <label htmlFor="reserved_time">Time</label>
-                    <input onChange={handleChange} id="reserved_time" name="reserved_time" type="time" required />
+                    <input className="form-control" onChange={handleChange} id="reserved_time" name="reserved_time" type="time" required />
                 </div>
                 <div className="mt-2 d-flex flex-column justify-content-between">
                     <label htmlFor="number_of_seat">Number of seat</label>
-                    <input onChange={handleChange} id="number_of_seat" value={data.number_of_seat} name="number_of_seat" type="number" required />
+                    <input className="form-control" onChange={handleChange} id="number_of_seat" value={data.number_of_seat} name="number_of_seat" type="number" required />
                 </div>
                 <div className="mt-2 d-flex flex-column justify-content-between">
                     <label htmlFor="reserved_location">Select Location</label>
-                    <select onChange={(e) => setDispatcher(e.target.value)} required id="reserved_location">
+                    <select className="form-control" onChange={(e) => setDispatcher(e.target.value)} required id="reserved_location">
                         <option value=""></option>
                         {locations.map((data, index) => (
                             <option key={index} value={data.id}>{data.name}</option>

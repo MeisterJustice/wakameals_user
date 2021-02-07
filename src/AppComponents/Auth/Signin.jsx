@@ -36,7 +36,7 @@ export default function SignIn(props) {
         <div>
             <HeaderNav />
             <div className="login container" style={{display: "flex", justifyContent: "center", alignItems: "center", width: "100%", height: "90vh"}}>
-            <div className="card border-0 shadow " style={{backgroundColor: '#B02121', width: "60%"}}>
+            <div className="card border-0 shadow login-form" style={{backgroundColor: '#B02121'}}>
                 <div className="card-body">
                     <from>
                         <div className="from-row">

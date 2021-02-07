@@ -39,13 +39,13 @@ const Meal = (props) => {
                             </div>
                             <div style={{width: "100%"}} className="col-lg-9">
                                 <div className="food-desc">{props.meal.name}</div>
-                                <div className="food-desc mute mt-1">{parse(props.meal.description.substring(0, 35))}</div>
-                                <button 
+                                <div className="food-desc mute mt-1">{parse(props.meal.description)}</div>
+                                {/* <button 
                                     className="btn btn-style btn-sm"
                                     onClick={handleClickOpen}
                                 >
                                     read more
-                                </button>
+                                </button> */}
                             </div>
                         </div>
                     </div>

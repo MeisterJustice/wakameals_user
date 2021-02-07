@@ -14,6 +14,7 @@ import Bg from './Bg';
 import CatItems from './CatItems';
 import Footer from '../../Navigation/Footer';
 import BookTable from './BookTable';
+import { Link } from 'react-router-dom';
 
 
 export default function LandingPage(props) {
@@ -38,6 +39,8 @@ export default function LandingPage(props) {
     const [cartSize, setCartSize] = useState(0)
     const [tabValue, setTabValue] = React.useState(0);
     const [categoryTab, setCategoryTab] = useState(false)
+    const [isLuck, setIsLuck] = useState(false)
+    const [pickupLocation, setPickupLocation] = useState({})
     const handleChangeTab = (event, newValue) => {
         setTabValue(newValue);
     };
@@ -65,7 +68,7 @@ export default function LandingPage(props) {
         } else {
             Axios.post("https://server.wakameals.validprofits.xyz/api/cart/new", {
                 ...data,
-                name: person
+                name: person ? person : "John Doe"
             }, {
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -109,11 +112,11 @@ export default function LandingPage(props) {
             setInitialCart(parsedCart)
             setCartSize(parsedCart.length)
         }
-        if(parsedLocation){
-            setLocation(true)
-            setOpenSuccess(true)
-            setOpen(false)
-        } 
+        // if(parsedLocation){
+        //     setLocation(true)
+        //     setOpenSuccess(true)
+        //     setOpen(false)
+        // } 
         Axios.get("https://server.wakameals.validprofits.xyz/api/place/list")
         .then((res) => {
             setStates(res.data.places)
@@ -159,13 +162,13 @@ export default function LandingPage(props) {
             {!finish && (
                 <div>
                     {states.length > 0 && !openFail && !openSuccess && open && (
-                        <WelcomeModal setSuccess={setSuccess} open={open} openFail={openFail} setOpenFail={setOpenFail} openSuccess={openSuccess} setOpenSuccess={setOpenSuccess} setOpen={setOpen} states={states} {...props} />
+                        <WelcomeModal setLocation={setPickupLocation} setIsLuck={setIsLuck} setSuccess={setSuccess} open={open} openFail={openFail} setOpenFail={setOpenFail} openSuccess={openSuccess} setOpenSuccess={setOpenSuccess} setOpen={setOpen} states={states} {...props} />
                     )}
                     {openFail && !openSuccess && (
                         <FailModal notifyWarning={notifyWarning} open={open} openFail={openFail} setOpenFail={setOpenFail} openSuccess={openSuccess} setOpenSuccess={setOpenSuccess} setOpen={setOpen} />
                     )}
-                    {!openFail && openSuccess && (
-                        <SuccessModal notifySuccess={notifySuccess} location={location} setSuccess={setSuccess} open={open} openFail={openFail} setOpenFail={setOpenFail} openSuccess={openSuccess} setOpenSuccess={setOpenSuccess} setOpen={setOpen} />
+                    {!openFail && openSuccess && pickupLocation.slug && (
+                        <SuccessModal setSuccess={setSuccess} setOpen={setOpen} pickupLocation={pickupLocation} isLuck={isLuck} notifySuccess={notifySuccess} location={location} openFail={openFail} setOpenFail={setOpenFail} openSuccess={openSuccess} setOpenSuccess={setOpenSuccess} setOpen={setOpen} />
                     )}
                 </div>
             )}
@@ -193,7 +196,7 @@ export default function LandingPage(props) {
                                     <div className="col-lg-10">
                                         <div className="d-flex justify-content-start align-items-center pb-3">
                                             <div className="py-3 px-5 cursor" style={{fontWeight: "bold", color: tabValue === 0 ? "#B02121" : "gray", backgroundColor: tabValue === 0 ? "white" : "transparent"}} onClick={(e) => handleChangeTab(e, 0)}><FaUtensilSpoon />  Menu</div>
-                                            <div className="py-3 px-5 cursor" style={{fontWeight: "bold", color: tabValue === 1 ? "#B02121" : "gray", backgroundColor: tabValue === 1 ? "white" : "transparent"}} onClick={(e) => handleChangeTab(e, 1)}><FaTable />  Book a Table</div>
+                                            <div className="py-3 px-5 cursor" style={{fontWeight: "bold", color: tabValue === 1 ? "#B02121" : "gray", backgroundColor: tabValue === 1 ? "white" : "transparent"}} onClick={(e) => handleChangeTab(e, 1)}><FaTable />  Book an Engagement</div>
                                         </div>
                                         {tabValue === 0 && (
                                             <FoodMenu notifySuccess={notifySuccess} handleAddCart={handleAddCart} person={person} meals={meals} />
@@ -207,6 +210,13 @@ export default function LandingPage(props) {
                                             )}
                                             {persons.length === 1 && step < numberOfPersons.length && (
                                                 <button onClick={changePerson1} className="btn btn-style btn-lg">NEXT PERSON</button>
+                                            )}
+                                        </div>
+                                        <div className="mb-5">
+                                            {tabValue === 0 && (
+                                                <Link to="/cart" className="nav-item">
+                                                    <button className="btn" style={{color: "white", backgroundColor: "#B02121"}}>CONTINUE TO CART</button>
+                                                </Link>
                                             )}
                                         </div>
                                     </div>

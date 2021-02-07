@@ -45,8 +45,8 @@ export default function HeaderNav(props) {
     return (
         <div>
                {/* ============ NAVBAR SECTION==========  */}
-        <nav className="navbar navbar-expand-lg">
-            <Link to="/" className="navbar-brand"> <img  alt="logo" src="/logo.jpeg" /></Link>
+        <nav className="navbar navbar-expand-lg py-2">
+            <Link to="/" className="navbar-brand"> <img  alt="logo" src="/logo.png" /></Link>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <BiMenuAltRight style={{color: "white", fontSize: "30px"}}/>
             </button>

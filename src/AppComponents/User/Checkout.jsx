@@ -83,9 +83,9 @@ const Checkout = (props) => {
     })
     const [address, setAddress] = useState("")
     const [pickupLocation, setPickupLocation] = useState({
-        data: [],
         location: "",
-        code: ""
+        code: "",
+        place: ""
     })
     const [cart, setCart] = useState([])
     const [loading, setLoading] = useState(true)
@@ -98,57 +98,55 @@ const Checkout = (props) => {
 
     const onSubmit = () => {
         setLoadOrder(true)
-        if("07:00" > first_time){
-            notifyWarning("time must be after 6:59 AM")
-        }
-        if(second_time > "17:15"){
-            notifyWarning("time must be before 5:15 PM")
-        }
         let token = localStorage.getItem("token")
         let parsedToken = JSON.parse(token)
-        let location = localStorage.getItem("location")
-        let parsedLocation = JSON.parse(location)
         let cart = localStorage.getItem("cart")
         let parsedCart = JSON.parse(cart)
-        var dates = []
-        var times = []
-        if(checkedMonday.status){
-            dates.push(checkedMonday.date.toLocaleDateString('en-CA'))
-        } if(checkedTuesday.status){
-            dates.push(checkedTuesday.date.toLocaleDateString('en-CA'))
-        } if(checkedWednesday.status){
-            dates.push(checkedWednesday.date.toLocaleDateString('en-CA'))
-        }if(checkedThursday.status){
-            dates.push(checkedThursday.date.toLocaleDateString('en-CA'))
-        }if(checkedFriday.status){
-            dates.push(checkedFriday.date.toLocaleDateString('en-CA'))
-        }if(checkedSaturday.status){
-            dates.push(checkedSaturday.date.toLocaleDateString('en-CA'))
-        }if(checkedSunday.status){
-            dates.push(checkedSunday.date.toLocaleDateString('en-CA'))
-        } if(first_time !== null){
-            times.push(first_time)
-        }if(second_time !== null){
-            times.push(second_time)
-        }
-        if(checked && dates.length === 0){
-            notifyWarning("You must select at least one date")
-        }
-        if(checked && times.length === 0){
-            notifyWarning("You must select at least one time")
-        }
-        if(selected === "door_delivery" && address.length === 0) {
-            notifyWarning("address must not be empty")
-            setLoadOrder(false)
-        }
+        // if("07:00" > first_time){
+        //     notifyWarning("time must be after 6:59 AM")
+        // }
+        // if(second_time > "17:15"){
+        //     notifyWarning("time must be before 5:15 PM")
+        // }
+        // var dates = []
+        // var times = []
+        // if(checkedMonday.status){
+        //     dates.push(checkedMonday.date.toLocaleDateString('en-CA'))
+        // } if(checkedTuesday.status){
+        //     dates.push(checkedTuesday.date.toLocaleDateString('en-CA'))
+        // } if(checkedWednesday.status){
+        //     dates.push(checkedWednesday.date.toLocaleDateString('en-CA'))
+        // }if(checkedThursday.status){
+        //     dates.push(checkedThursday.date.toLocaleDateString('en-CA'))
+        // }if(checkedFriday.status){
+        //     dates.push(checkedFriday.date.toLocaleDateString('en-CA'))
+        // }if(checkedSaturday.status){
+        //     dates.push(checkedSaturday.date.toLocaleDateString('en-CA'))
+        // }if(checkedSunday.status){
+        //     dates.push(checkedSunday.date.toLocaleDateString('en-CA'))
+        // } if(first_time !== null){
+        //     times.push(first_time)
+        // }if(second_time !== null){
+        //     times.push(second_time)
+        // }
+        // if(checked && dates.length === 0){
+        //     notifyWarning("You must select at least one date")
+        // }
+        // if(checked && times.length === 0){
+        //     notifyWarning("You must select at least one time")
+        // }
+        // if(selected === "door_delivery" && address.length === 0) {
+        //     notifyWarning("address must not be empty")
+        //     setLoadOrder(false)
+        // }
         Axios.post("https://server.wakameals.validprofits.xyz/api/order/new", {
             delivery_type: selected,
             pickup_code: pickupLocation.code,
-            ...parsedLocation,
+            place: pickupLocation.place,
             address,
-            recurring: checked,
-            recurring_dates: dates,
-            recurring_times: times,
+            // recurring: checked,
+            // recurring_dates: dates,
+            // recurring_times: times,
             meals: parsedCart
         }, {
             headers: {
@@ -269,13 +267,22 @@ const Checkout = (props) => {
 
     useEffect(() => {
         if(typeof props.location.query !== "undefined"){
-    
         let token = localStorage.getItem("token")
         let parsedToken = JSON.parse(token)
         let cart = localStorage.getItem("cart")
         let parsedCart = JSON.parse(cart)
+        let door_delivery = localStorage.getItem("door_delivery")
+        let parsedDoorDelivery = JSON.parse(door_delivery)
+        let pickup = localStorage.getItem("pickup")
+        let parsedPickup = JSON.parse(pickup)
         let option = localStorage.getItem("deliveryOption")
         let parsedOption = JSON.parse(option)
+        if(parsedOption === "door_delivery"){
+            setAddress(parsedDoorDelivery)
+        }
+        if(parsedOption === "pickup"){
+            setPickupLocation(parsedPickup)
+        }
         setSelected(parsedOption)
         setCart(parsedCart)
         Axios.get("https://server.wakameals.validprofits.xyz/api/profile/details", {
@@ -303,27 +310,11 @@ const Checkout = (props) => {
                 phone: res.data.details.phone,
             })
         })
-        Axios.get("https://server.wakameals.validprofits.xyz/api/avail_pickup/list")
-        .then((res) => {
-            setPickupLocation({
-                ...pickupLocation,
-                data: res.data.pickup_locations
-            })
-        })
+       
         } else {
             history.push("/cart");
         }
     }, [])
-
-    const handlePickup = (code, data) => {
-        setPickupLocation({
-            ...pickupLocation,
-            location: `${data.address}, ${data.town.name}, ${data.lga.name}, ${data.state.name}`,
-            code: code
-        })
-        setSelected("pickup")
-        setOpen(false)
-    }
 
     const initializePayment = usePaystackPayment(config);
 
@@ -344,46 +335,47 @@ const Checkout = (props) => {
             {loading ? <Preloader /> : (
 
             
-            <div className="my-5 container">
-                <div className="row">
-                    <div className="col-lg-8 bg-white shadow p-2">
+            <div className="my-5 container checkout-container">
+                <div style={{height: "100%"}} className="row d-flex justify-content-center align-items-center">
+                    <div className="col-lg-8 checkout p-2 shadow px-2 py-4">
                         <div className="container">
-                            <h5>Select Delivery / Pickup Option</h5>
+                            <h5>Delivery Summary</h5>
                             <hr className="mt-3" />
 
                             <div className="mt-2 row" >
                                 <div className="col-lg-1"/>
-                                <div onClick={() => setSelected("delivery")} style={{border: "1px solid gray", backgroundColor: selected === "delivery" ? "#ffeee3" : "white"}} className="col-lg-5 cursor mr-lg-1">
-                                    <div className="p-1">
-                                        <h6 style={{color: "#B02121"}}>Deliver to me</h6>
+                                <div style={{border: "1px solid gray", backgroundColor: selected === "door_delivery" ? "#ffeee3" : "white"}} className="col-lg-5 cursor mr-lg-1">
+                                    <div className="p-2">
+                                        <h5 style={{color: "#B02121"}}>Deliver to me</h5>
                                         <hr className="mt-2" />
                                         <div className="mt-2">
-                                            <div style={{fontSize: "13px"}}>
-                                                <MdPerson style={{color: "#B02121", fontSize: "15px"}}/>{`   ${user.title} ${user.first_name} ${user.last_name}`}
+                                            <div style={{fontSize: "15px"}}>
+                                                <MdPerson style={{color: "#B02121", fontSize: "17px"}}/>{`   ${user.title} ${user.first_name} ${user.last_name}`}
                                             </div>
-                                            <div className="mt-2" style={{fontSize: "13px"}}>
-                                                <MdPhoneAndroid style={{color: "#B02121", fontSize: "15px"}}/>{`   ${user.phone}`}
+                                            <div className="mt-2" style={{fontSize: "15px"}}>
+                                                <MdPhoneAndroid style={{color: "#B02121", fontSize: "17px"}}/>{`   ${user.phone}`}
                                             </div>
-                                            <div className="my-3">
-                                                <input
-                                                    name="address"
-                                                    onChange={e => setAddress(e.target.value)}
-                                                    type="text"
-                                                    className="form-control"
-                                                    placeholder="your delivery address"
-                                                    required
-                                                />
-                                            </div>
+                                            {address.length > 0 && (
+                                                <div className="my-3">
+                                                    <input
+                                                        name="address"
+                                                        value={address}
+                                                        disabled
+                                                        type="text"
+                                                        className="form-control"
+                                                    />
+                                                </div>
+                                            )}
                                         </div>
                                     </div>
                                 </div>
-                                <div onClick={handleClickOpen} style={{border: "1px solid gray", backgroundColor: selected === "pickup" ? "#ffeee3" : "white"}} className="col-lg-5 cursor ml-lg-1 mt-3 mt-lg-0">
+                                <div style={{border: "1px solid gray", backgroundColor: selected === "pickup" ? "#ffeee3" : "white"}} className="col-lg-5 cursor ml-lg-1 mt-3 mt-lg-0">
                                     <div className="p-1">
-                                        <h6 style={{color: "#B02121"}}>Select Pickup Location</h6>
+                                        <h6 style={{color: "#B02121"}}>Selected Pickup Location</h6>
                                         <hr className="mt-2" />
                                         <div className="mt-2">
-                                            <div style={{fontSize: "13px"}}>
-                                                <MdHome style={{color: "#B02121", fontSize: "15px"}}/>{`   ${pickupLocation.location}`}
+                                            <div style={{fontSize: "15px"}}>
+                                                <MdHome style={{color: "#B02121", fontSize: "17px"}}/>{`   ${pickupLocation.location}`}
                                             </div>
                                         </div>
                                     </div>
@@ -395,9 +387,9 @@ const Checkout = (props) => {
                     <div className="col-lg-1">
 
                     </div>
-                    <div className="col-lg-3 mt-3 mt-lg-0 bg-white shadow p-2">
+                    <div className="col-lg-3 mt-3 mt-lg-0 p-2">
                         <div>
-                            <h5>Order Options</h5>
+                            {/* <h5>Order Options</h5>
                             <hr className="mt-3" />
                             <div className="mt-2 p-1" style={{display: "flex", alignItems: "center", border: "1px solid gray"}}>
                                 <Checkbox
@@ -406,8 +398,8 @@ const Checkout = (props) => {
                                     inputProps={{ 'aria-label': 'primary checkbox' }}
                                 />
                                 <div className="ml-2">Add to reoccuring order?</div>
-                            </div>
-                            {checked && (
+                            </div> */}
+                            {/* {checked && (
                                 <div className="mt-3">
                                     <h6 style={{color: "#B02121"}}>Choose delivery days</h6>
                                     <hr className="mt-2" />
@@ -449,7 +441,7 @@ const Checkout = (props) => {
                                         />
                                     </div>
                                 </div>
-                            )}
+                            )} */}
                             {loadOrder ? (
                                 <div style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
                                     <div className="spinner-grow" role="status">
@@ -459,7 +451,7 @@ const Checkout = (props) => {
                             ) : (
 
                             <div className="mt-3">
-                                <button onClick={onSubmit} className="btn btn-lg btn-block" style={{backgroundColor: "#B02121", border: "none", color: "white"}}>CONTINUE TO ORDER</button>
+                                <button onClick={onSubmit} className="btn btn-lg btn-block" style={{backgroundColor: "#B02121", border: "none", color: "white", fontWeight: "bold", fontSize: "19px"}}>CONTINUE TO ORDER</button>
                             </div>
                             )}
                         </div>
@@ -468,7 +460,7 @@ const Checkout = (props) => {
             </div>
             )}
             {/* FOR PICKUP LOCATION SELECTION */}
-            <Dialog
+            {/* <Dialog
                 fullWidth
                 open={open}
                 aria-labelledby="alert-dialog-title"
@@ -482,9 +474,9 @@ const Checkout = (props) => {
                 <DialogContent>
                     <DialogContentText id="alert-dialog-cart">                                
                         <div>
-                            {pickupLocation.data.map((data, index) => (
-                                <div onClick={() => handlePickup(data.code, data)} style={{border: "1px gray solid", fontSize: "14px"}} className="p-2 hover-location cursor mt-2" >
-                                    {data.address}, {data.town.name}, {data.lga.name}, {data.state.name}
+                            {pickupLocation.data.map((data) => (
+                                <div key={data.id} onClick={() => handlePickup(data.code, data)} style={{border: "1px gray solid", fontSize: "14px"}} className="p-2 hover-location cursor mt-2" >
+                                    {data.address}, {data.place.name}, {data.name}
                                 </div>
                             ))}
                         </div>
@@ -495,7 +487,7 @@ const Checkout = (props) => {
                     CLOSE
                 </Button>
                 </DialogActions>
-            </Dialog>
+            </Dialog> */}
 
 
             {/* PAYMENT */}
