@@ -54,6 +54,7 @@ body {
 .modal-btn {
   background-color: #19191a !important;
   color: white !important;
+  box-shadow: 2px 3px #464545;
 }
 
 .click:focus {
@@ -134,9 +135,22 @@ body {
 
 .hover-location:hover {
   background-color: #B02121;
-  color: white;
+  color: rgb(143, 138, 138);
   transition: 0.2s all ease;
   border: none;
+}
+
+.book {
+  box-shadow: 5px 10px #b1aeae;
+  background-color: rgba(176, 33, 33, 0.4);
+}
+
+.location-pointer {
+  width: 80px;
+  height: 80px;
+  background-color: white;
+  border-radius: 50px;
+  margin-left: 10px;
 }
 
 
@@ -209,8 +223,12 @@ body {
 }
 
 .order-now {
-  height: 120px;
+  height: 150px;
   background-color: #B02121;
+}
+
+.order-lg {
+  width: 400px;
 }
 
 .cat-title {
@@ -248,19 +266,38 @@ body {
   color: #B02121;
 }
 
+.checkout {
+  background-color: rgba(176, 33, 33, 0.4);
+  box-shadow: 5px 10px #b1aeae;
+}
+
+.checkout-container{
+  height: 85vh;
+}
+
+.login-form {
+  width: 60%;
+}
+
 @media only screen and (max-width: 400px) {
+  .checkout-container{
+    height: 80vh;
+  }
   .muted {
     top: 61%;
   }
   .order-now {
-    height: 210px;
+    height: 220px;
     width: 100%;
   }
 }
 
 @media only screen and (max-width: 800px) {
+  .login-form {
+    width: 85%;
+  }
   .order-now {
-    height: 250px;
+    height: 260px;
     width: 100%;
   }
 }

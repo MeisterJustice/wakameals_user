@@ -58,7 +58,7 @@ export default function AddToCart({meal, person, handleAddCart, open, handleClos
                             ))}
                             <div className="mt-3">
                                 <label htmlFor="additional-request" style={{color: "black"}}>Additional Request</label>
-                                <input onChange={(e) => setCartData({...cartData, special_instruction: e.target.value})} type="text" className="form-control" id="additional-request" placeholder="I am allergic to floor"/>
+                                <input onChange={(e) => setCartData({...cartData, special_instruction: e.target.value})} type="text" className="form-control" id="additional-request" placeholder="I am allergic to garlic"/>
                             </div>
                             <div onClick={handleAdd} className="mt-3">
                                 <button data-dismiss="modal" aria-label="Close" className="btn btn-md btn-block" style={{backgroundColor: "#B02121", color: "white"}}>ADD TO CART</button>

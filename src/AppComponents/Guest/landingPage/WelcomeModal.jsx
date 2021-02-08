@@ -19,7 +19,10 @@ const WelcomeModal = (props) => {
     const [place, setPlace] = useState({
         name: "",
         slug: "",
-        id: ""
+        id: "",
+        code: "",
+        delivery_available: true,
+        pickup_available: true
     })
     
 
@@ -29,16 +32,22 @@ const WelcomeModal = (props) => {
         localStorage.setItem("location", JSON.stringify({
             name: place.name,
             slug: place.slug,
-            id: place.id
+            id: place.id,
+            code: place.code,
+            delivery_available: place.delivery_available,
+            pickup_available: place.pickup_available
         }))
+        props.setLocation({
+            name: place.name,
+            slug: place.slug,
+            id: place.id,
+            code: place.code,
+            delivery_available: place.delivery_available,
+            pickup_available: place.pickup_available
+        })
+        props.setIsLuck(true)
         props.setOpenSuccess(true)
     }
-
-    const onClose = () => {
-        props.setOpen(false)
-        props.setOpenSuccess(false)
-    }
-
 
     return (
         <div>
@@ -48,8 +57,7 @@ const WelcomeModal = (props) => {
                 style={customStyles}
                 contentLabel="Select Location"
             >
-                <h5 className="text-right" onClick={onClose}>X</h5>
-                <h6 className="modal-title white" id="myLandingModalLabel">Welcome to Wakameals, please choose your location</h6>
+                <h6 className="modal-title white" id="myLandingModalLabel">Welcome to WakaFoods! Please choose your location</h6>
                 <div className="mt-3">
                     <LocationDropdown {...props} openFail={props.openFail} setOpenFail={props.setOpenFail} openSuccess={props.openSuccess} setOpenSuccess={props.setOpenSuccess} place={place} setPlace={setPlace} />
                     <div className="py-2">

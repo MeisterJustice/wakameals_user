@@ -7,9 +7,6 @@ const LocationDropdown = (props) => {
     const onChange = async (e) => {
         setLoading(true)
         let selectedPlace = await props.states.filter((place) => place.id == e.target.value)
-        // if(isAvailable === "0"){
-        //     props.setOpenSuccess(false)
-        // }
         props.setPlace({
             ...selectedPlace[0]
         })
@@ -28,7 +25,7 @@ const LocationDropdown = (props) => {
                 <div>
                     <label htmlFor="locationDropdown" className="white">Select Location</label>
                         <select className="form-control cursor" onChange={onChange}>
-                            <option value="">Pick a state...</option>
+                            <option value="">Pick a city...</option>
                             {props.states.map((data) => (
                                 <option className="cursor" key={data.slug} value={data.id}>{data.name}</option>
                             ))}

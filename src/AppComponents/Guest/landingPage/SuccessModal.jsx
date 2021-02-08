@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { useEffect, useState } from 'react';
 import Modal from 'react-modal';
 import { useDispatch } from 'react-redux';
@@ -24,6 +25,48 @@ const SuccessModal = (props) => {
     const [names, setNames] = useState({})
     const [numberOfPersons, setNumberOfPersons] = useState([])
     const [isoptionAvailable, setIsoptionAvailable] = useState(false);
+    const [address, setAddress] = useState("")
+    const [pickupLocation, setPickupLocation] = useState({
+        data: [],
+        location: "",
+        code: "",
+        place: ""
+    })
+    const [delivery, setDelivery] = useState("")
+    const [isStep1Done, setIsStep1Done] = useState(false)
+    const [availableOption, setAvailableOption] = useState("")
+    const [isDoorDelivery, setIsDoorDelivery] = useState(true)
+    const [isPickupDelivery, setIsPickupDelivery] = useState(true)
+
+    useEffect(() => {
+        axios.get(`https://server.wakameals.validprofits.xyz/api/avail_pickup/${props.pickupLocation.slug}/list`)
+        .then((res) => {
+            setPickupLocation({
+                ...pickupLocation,
+                data: res.data.pickup_locations
+            })
+        })
+    }, [])
+
+    const handleAddress = () => {
+        localStorage.setItem("door_delivery", JSON.stringify(address))
+        setIsStep1Done(true)
+    }
+
+    const handlePickup = (code, data) => {
+        setPickupLocation({
+            ...pickupLocation,
+            location: `${data.address}, ${data.place.name}, ${data.name}`,
+            code: code,
+            place: data.place.id
+        })
+        localStorage.setItem("pickup", JSON.stringify({
+            location: `${data.address}, ${data.place.name}, ${data.name}`,
+            code: code,
+            place: data.place.id
+        }))
+        setIsStep1Done(true)
+    }
 
     const cancel = () => {
             localStorage.removeItem("names")
@@ -64,15 +107,30 @@ const SuccessModal = (props) => {
 
     const option = (option) => {
         localStorage.setItem("deliveryOption", JSON.stringify(option))
-        setIsoptionAvailable(true)
+        if(option === "door_delivery" && !props.pickupLocation.delivery_available){
+            setIsDoorDelivery(false)
+            setIsPickupDelivery(true)
+        } else if (option === "pickup" && !props.pickupLocation.pickup_available) {
+            setIsPickupDelivery(false)
+            setIsDoorDelivery(true)
+        }
+        else {
+            setIsoptionAvailable(true)
+            setAvailableOption(option)
+            setDelivery(option)
+        }
     }
 
     const option2 = (option) => {
         if(option === "continue") {
             setStep(2)
         } else {
+            props.setOpen(true)
+            props.setSuccess(false)
             props.setOpenSuccess(false)
-            props.setOpenFail(false)
+            setIsDoorDelivery(true)
+            setIsPickupDelivery(true)
+            setStep(1)
         }
     }
 
@@ -104,18 +162,70 @@ const SuccessModal = (props) => {
                 <div>
                     {!isoptionAvailable ? (
                         <div>
-                            <div className="py-5 white">
-                                Wow! you are in luck, choose an option below……
-                            </div>
-                            <div className="d-flex justify-content-around align-items-center p-4">
-                                <button onClick={() => option("door_delivery")} className="btn btn-sm modal-btn">Delivery</button>
-                                <button onClick={() => option("pickup")} className="btn btn-sm modal-btn">Pickup</button>
+                            {isDoorDelivery && (
+                                <div>
+                                    {!props.isLuck ? (
+                                        <div className="py-5 white">
+                                            Choose an option below……
+                                        </div>
+                                    ) : (
+                                        <div>
+                                            {isPickupDelivery && (
+                                                <div className="py-5 white">
+                                                    Wow! you are in luck, choose an option below……
+                                                </div> 
+                                            )}
+                                        </div>
+                                    )}
+                                </div>
+                            )}
+                            <div>
+                                {!isDoorDelivery && (
+                                    <p style={{color: "white"}}>Delivery Option isn't available in your location yet. Please select another option</p>
+                                )}
+                                {!isPickupDelivery && (
+                                    <p style={{color: "white"}}>Pickup Option isn't available in your location yet. Please select another option</p>
+                                )}
+                                <div className="d-flex justify-content-around align-items-center p-4">
+                                    <button onClick={() => option("door_delivery")} className="btn btn-sm modal-btn">Delivery</button>
+                                    <button onClick={() => option("pickup")} className="btn btn-sm modal-btn">Pickup</button>
+                                </div>
                             </div>
                         </div>
                     ) : (
-                        <div className="d-flex justify-content-around align-items-center p-5">
-                            <button onClick={() => option2("reset")} className="btn btn-sm modal-btn mr-2">Reset</button>
-                            <button onClick={() => option2("continue")} className="btn btn-sm modal-btn">Continue</button>
+                        <div>
+                            {availableOption === "door_delivery" && !isStep1Done && (
+                                <div className="p-5">
+                                    <input
+                                        name="address"
+                                        onChange={e => setAddress(e.target.value)}
+                                        type="text"
+                                        className="form-control"
+                                        placeholder="your delivery address"
+                                        required
+                                    />
+                                    <button onClick={handleAddress} className="btn btn-sm modal-btn mt-2">Continue</button>
+                                </div>
+                            )}
+                            {availableOption === "pickup" && !isStep1Done && (
+                                <div className="my-3">
+                                    {pickupLocation.data.map((data) => (
+                                        <div key={data.id} onClick={() => handlePickup(data.code, data)} style={{border: "1px white solid", fontSize: "14px", color: "white"}} className="p-2 hover-location cursor mt-2" >
+                                            {data.address}, {data.place.name}, {data.name}
+                                            <span className="location-pointer">deh</span>
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
+                            {isStep1Done && (
+                                <div className="p-2">
+                                    <p style={{color: "white"}}>Great! {delivery} option is available in your location. Press reset to restart the checker or continue with your order...</p>
+                                    <div className="p-4 d-flex justify-content-around align-items-center">
+                                        <button onClick={() => option2("reset")} className="btn btn-sm modal-btn mr-2">Reset</button>
+                                        <button onClick={() => option2("continue")} className="btn btn-sm modal-btn">Continue</button>
+                                    </div>
+                                </div>
+                            )}
                         </div>
                     )}
                 </div>
