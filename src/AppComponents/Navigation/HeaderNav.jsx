@@ -46,7 +46,7 @@ export default function HeaderNav(props) {
         <div>
                {/* ============ NAVBAR SECTION==========  */}
         <nav className="navbar navbar-expand-lg py-2">
-            <Link to="/" className="navbar-brand"> <img  alt="logo" src="/logo.png" /></Link>
+            <Link to="/" className="navbar-brand"> <img style={{borderRadius: "4px"}} alt="logo" src="/logo.jpg" /></Link>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <BiMenuAltRight style={{color: "white", fontSize: "30px"}}/>
             </button>
@@ -79,14 +79,14 @@ export default function HeaderNav(props) {
                     {props.setOpen && props.home && (
                         <div className="nav-item cursor">
                             <div onClick={changeLocation} className="nav-link text-white">
-                                <MdAddLocation style={{color: "#B02121", fontSize: "1.5em"}}/> change location
+                                <MdAddLocation style={{color: "#ff8903", fontSize: "1.5em"}}/> change location
                             </div>
                         </div>
                     )}
                     {!props.cart && (
                         <Link to="/cart" className="nav-item">
                             <a className="nav-link text-white">
-                                <MdShoppingCart style={{color: "#B02121", fontSize: "1.5em"}}/> {cart} items
+                                <MdShoppingCart style={{color: "#ff8903", fontSize: "1.5em"}}/> {cart} items
                             </a>
                         </Link>
                     )}

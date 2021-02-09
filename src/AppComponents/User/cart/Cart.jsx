@@ -84,19 +84,19 @@ const Cart = (props) => {
                     {cart.length > 0 && (
                         <div className="mt-5" style={{display: "flex", alignItems: "center", justifyContent: "flex-end"}}>
                             <div style={{fontWeight: "bold"}}>TOTAL:</div>
-                            <div style={{color: "#B02121", fontSize: "24px", fontWeight: "bold"}} className="ml-5 mr-md-4"><Naira>{item.total}</Naira></div>
+                            <div style={{color: "#ff8903", fontSize: "24px", fontWeight: "bold"}} className="ml-5 mr-md-4"><Naira>{item.total}</Naira></div>
                         </div>
                     )}
                     <div className="mt-5 shadow">
                         <div className="p-4" style={{display: "flex", alignItems: "center", justifyContent: "flex-end"}}>
                             <Link to="/">
-                                <button style={{color: "#B02121", backgroundColor: "white", border: "none"}} className="btn shadow px-3 py-2">
+                                <button style={{color: "#ff8903", backgroundColor: "white", border: "none"}} className="btn shadow px-3 py-2">
                                     CONTINUE SHOPPING
                                 </button>
                             </Link>
                             {cart.length > 0 && (
                                 <Link to={{pathname: `${location ? "/checkout" : "/"}`, query: {price: item.total, location: true}}}>
-                                    <button style={{color: "white", backgroundColor: "#B02121", border: "none"}} className="btn ml-4 shadow px-3 py-2">
+                                    <button style={{color: "white", backgroundColor: "#ff8903", border: "none"}} className="btn ml-4 shadow px-3 py-2">
                                         GO TO CHECKOUT
                                     </button>
                                 </Link>

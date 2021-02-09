@@ -65,7 +65,7 @@ export default function Password(props) {
                 pauseOnHover
             />
             <div className="login container" style={{display: "flex", justifyContent: "center", alignItems: "center", width: "100%", height: "90vh"}}>
-            <div className="card border-0 shadow " style={{backgroundColor: '#B02121', width: "60%"}}>
+            <div className="card border-0 shadow " style={{backgroundColor: '#ff8903', width: "60%"}}>
                 <div className="card-body">
                     <from>
                         <div className="from-row">

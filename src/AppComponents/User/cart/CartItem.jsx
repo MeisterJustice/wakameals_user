@@ -75,15 +75,15 @@ const CartItem = (props) => {
                                     <span className="sr-only">Loading...</span>
                                 </div>
                             ) : (
-                                <div onClick={removeCart} style={{color: "#B02121", fontWeight: "bold", fontSize: "13px"}} className="cursor">
-                                    <MdDeleteForever style={{color: "#B02121", fontSize: "20px"}}/> REMOVE
+                                <div onClick={removeCart} style={{color: "#ff8903", fontWeight: "bold", fontSize: "13px"}} className="cursor">
+                                    <MdDeleteForever style={{color: "#ff8903", fontSize: "20px"}}/> REMOVE
                                 </div>
                             )}
                         </div>
                     </div>
                 </div>
                 <div className="col-lg-2 mt-3 mt-lg-0">
-                    <div style={{fontSize: "12px", color: "#B02121", fontWeight: "bold"}}>
+                    <div style={{fontSize: "12px", color: "#ff8903", fontWeight: "bold"}}>
                         MEAL PRICE
                     </div>
                     <div className="mt-2">
@@ -91,7 +91,7 @@ const CartItem = (props) => {
                     </div>
                 </div>
                 <div className="col-lg-2 mt-3 mt-lg-0">
-                    <div style={{fontSize: "12px", color: "#B02121", fontWeight: "bold"}}>
+                    <div style={{fontSize: "12px", color: "#ff8903", fontWeight: "bold"}}>
                         EXTRAS PRICE
                     </div>
                     <div className="mt-2">
@@ -99,7 +99,7 @@ const CartItem = (props) => {
                     </div>
                 </div>
                 <div className="col-lg-2 mt-3 mt-lg-0">
-                    <div style={{fontSize: "12px", color: "#B02121", fontWeight: "bold"}}>
+                    <div style={{fontSize: "12px", color: "#ff8903", fontWeight: "bold"}}>
                         TOTAL PRICE
                     </div>
                     <div className="mt-2">
@@ -113,8 +113,8 @@ const CartItem = (props) => {
                             <span className="sr-only">Loading...</span>
                         </div>
                     ) : (
-                        <div onClick={removeCart} style={{color: "#B02121", fontWeight: "bold", fontSize: "15px"}} className="cursor">
-                            <MdDeleteForever style={{color: "#B02121", fontSize: "25px"}}/> REMOVE
+                        <div onClick={removeCart} style={{color: "#ff8903", fontWeight: "bold", fontSize: "15px"}} className="cursor">
+                            <MdDeleteForever style={{color: "#ff8903", fontSize: "25px"}}/> REMOVE
                         </div>
                     )}
             </div>

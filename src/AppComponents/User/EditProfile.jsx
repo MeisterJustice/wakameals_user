@@ -149,7 +149,7 @@ export default function EditProfile() {
                         type="submit"
                         onClick={onSubmitHandle}
                         className="btn btn-block"
-                        style={{color: 'white', backgroundColor: ' #B02121'}}>
+                        style={{color: 'white', backgroundColor: ' #ff8903'}}>
                         UPDATE PROFILE
                     </button>
                 </div>

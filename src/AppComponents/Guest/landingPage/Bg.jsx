@@ -44,10 +44,10 @@ const Bg = () => {
                         <div className="mt-1">The first 50 persons to get an added FREE Meal Pack</div>
                     </div>
                     <div className="d-lg-none" style={{width: "100%"}}>
-                        <a style={{backgroundColor: "white", color: "#B02121", fontWeight: "bold"}} href="#meals" className="btn btn-lg btn-block">ORDER NOW</a>
+                        <a style={{backgroundColor: "white", color: "#ff8903", fontWeight: "bold"}} href="#meals" className="btn btn-lg btn-block">ORDER NOW</a>
                    </div>
                    <div className="d-lg-block d-none order-lg">
-                        <a style={{backgroundColor: "white", color: "#B02121", fontWeight: "bold"}} href="#meals" className="btn btn-lg">ORDER NOW</a>
+                        <a style={{backgroundColor: "white", color: "#ff8903", fontWeight: "bold"}} href="#meals" className="btn btn-lg">ORDER NOW</a>
                    </div>
                 </div>
             </div>

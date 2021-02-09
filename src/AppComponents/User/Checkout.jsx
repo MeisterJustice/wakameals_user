@@ -87,6 +87,7 @@ const Checkout = (props) => {
         code: "",
         place: ""
     })
+    const [placeId, setPlaceId] = useState("")
     const [cart, setCart] = useState([])
     const [loading, setLoading] = useState(true)
     const [selected, setSelected] = useState("door_delivery")
@@ -142,7 +143,7 @@ const Checkout = (props) => {
         Axios.post("https://server.wakameals.validprofits.xyz/api/order/new", {
             delivery_type: selected,
             pickup_code: pickupLocation.code,
-            place: pickupLocation.place,
+            place: placeId,
             address,
             // recurring: checked,
             // recurring_dates: dates,
@@ -193,7 +194,7 @@ const Checkout = (props) => {
             setLoading(false)
             notifySuccess("Order completed and payment successful")
             setOpen1(false)
-            history.push("/account/open")
+            history.push("/")
         })
       };
     
@@ -277,6 +278,9 @@ const Checkout = (props) => {
         let parsedPickup = JSON.parse(pickup)
         let option = localStorage.getItem("deliveryOption")
         let parsedOption = JSON.parse(option)
+        let place = localStorage.getItem("place")
+        let parsedPlace = JSON.parse(place)
+        setPlaceId(parsedPlace)
         if(parsedOption === "door_delivery"){
             setAddress(parsedDoorDelivery)
         }
@@ -346,14 +350,14 @@ const Checkout = (props) => {
                                 <div className="col-lg-1"/>
                                 <div style={{border: "1px solid gray", backgroundColor: selected === "door_delivery" ? "#ffeee3" : "white"}} className="col-lg-5 cursor mr-lg-1">
                                     <div className="p-2">
-                                        <h5 style={{color: "#B02121"}}>Deliver to me</h5>
+                                        <h5 style={{color: "#ff8903"}}>Deliver to me</h5>
                                         <hr className="mt-2" />
                                         <div className="mt-2">
                                             <div style={{fontSize: "15px"}}>
-                                                <MdPerson style={{color: "#B02121", fontSize: "17px"}}/>{`   ${user.title} ${user.first_name} ${user.last_name}`}
+                                                <MdPerson style={{color: "#ff8903", fontSize: "17px"}}/>{`   ${user.title} ${user.first_name} ${user.last_name}`}
                                             </div>
                                             <div className="mt-2" style={{fontSize: "15px"}}>
-                                                <MdPhoneAndroid style={{color: "#B02121", fontSize: "17px"}}/>{`   ${user.phone}`}
+                                                <MdPhoneAndroid style={{color: "#ff8903", fontSize: "17px"}}/>{`   ${user.phone}`}
                                             </div>
                                             {address.length > 0 && (
                                                 <div className="my-3">
@@ -371,11 +375,11 @@ const Checkout = (props) => {
                                 </div>
                                 <div style={{border: "1px solid gray", backgroundColor: selected === "pickup" ? "#ffeee3" : "white"}} className="col-lg-5 cursor ml-lg-1 mt-3 mt-lg-0">
                                     <div className="p-1">
-                                        <h6 style={{color: "#B02121"}}>Selected Pickup Location</h6>
+                                        <h6 style={{color: "#ff8903"}}>Selected Pickup Location</h6>
                                         <hr className="mt-2" />
                                         <div className="mt-2">
                                             <div style={{fontSize: "15px"}}>
-                                                <MdHome style={{color: "#B02121", fontSize: "17px"}}/>{`   ${pickupLocation.location}`}
+                                                <MdHome style={{color: "#ff8903", fontSize: "17px"}}/>{`   ${pickupLocation.location}`}
                                             </div>
                                         </div>
                                     </div>
@@ -401,7 +405,7 @@ const Checkout = (props) => {
                             </div> */}
                             {/* {checked && (
                                 <div className="mt-3">
-                                    <h6 style={{color: "#B02121"}}>Choose delivery days</h6>
+                                    <h6 style={{color: "#ff8903"}}>Choose delivery days</h6>
                                     <hr className="mt-2" />
                                     {days.map((data, index) => (
                                         <div className="mt-1 p-1" style={{display: "flex", alignItems: "center", border: "1px solid gray"}}>
@@ -422,7 +426,7 @@ const Checkout = (props) => {
                                         </div>
                                     ))}
                                     <div className="mt-2">
-                                        <h6 style={{color: "#B02121"}}>Choose delivery times (7:05 AM to 5:15 PM</h6>
+                                        <h6 style={{color: "#ff8903"}}>Choose delivery times (7:05 AM to 5:15 PM</h6>
                                         <div style={{fontSize: "13px"}}>First Time (Leave empty if not applicable)</div>
                                         <input
                                             name="first_time"
@@ -451,7 +455,7 @@ const Checkout = (props) => {
                             ) : (
 
                             <div className="mt-3">
-                                <button onClick={onSubmit} className="btn btn-lg btn-block" style={{backgroundColor: "#B02121", border: "none", color: "white", fontWeight: "bold", fontSize: "19px"}}>CONTINUE TO ORDER</button>
+                                <button onClick={onSubmit} className="btn btn-lg btn-block" style={{backgroundColor: "#ff8903", border: "none", color: "white", fontWeight: "bold", fontSize: "19px"}}>CONTINUE TO ORDER</button>
                             </div>
                             )}
                         </div>
@@ -467,7 +471,7 @@ const Checkout = (props) => {
                 aria-describedby="alert-dialog-cart"
             >
                 <DialogTitle id="alert-dialog-title">
-                    <h6 style={{color: '#B02121'}} className="modal-title" id="exampleModalCenterTitle">
+                    <h6 style={{color: '#ff8903'}} className="modal-title" id="exampleModalCenterTitle">
                         Select Location
                     </h6>
                 </DialogTitle>
@@ -483,7 +487,7 @@ const Checkout = (props) => {
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                <Button onClick={handleClose} style={{color: "#B02121", fontWeight: "550"}}>
+                <Button onClick={handleClose} style={{color: "#ff8903", fontWeight: "550"}}>
                     CLOSE
                 </Button>
                 </DialogActions>
@@ -503,7 +507,7 @@ const Checkout = (props) => {
                 <DialogContent>
                     <DialogContentText id="alert-dialog-cart">                                
                         <div style={{display: "flex", justifyContent: "center", alignItems: "center"}} className="mt-3">
-                            <button className="btn btn-lg btn-block" style={{backgroundColor: "#B02121", border: "none", color: "white", fontWeight: "bold"}} onClick={() => {
+                            <button className="btn btn-lg btn-block" style={{backgroundColor: "#ff8903", border: "none", color: "white", fontWeight: "bold"}} onClick={() => {
                                 initializePayment(onSuccess, onClose)
                             }}>CONTINUE TO PAYMENT</button>
                         </div>

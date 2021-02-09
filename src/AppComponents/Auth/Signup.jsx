@@ -40,7 +40,7 @@ export default function SignUp(props) {
         <div>
             <HeaderNav />
             <div className="login container" style={{display: "flex", justifyContent: "center", alignItems: "center", width: "100%", paddingTop: "50px", paddingBottom: "50px"}}>
-            <div className="card border-0 shadow login-form" style={{backgroundColor: '#B02121'}}>
+            <div className="card border-0 shadow login-form" style={{backgroundColor: '#ff8903'}}>
                 <div className="card-body">
                     <from>
                         <div className="from-row">
@@ -56,7 +56,7 @@ export default function SignUp(props) {
                                     type="text"
                                     className="form-control"
                                 />
-                                {error && <p style={styles.formError}>{error.errors.first_name}</p>}
+                                {error && <p style={styles.formError}>{error.errors && error.errors.first_name}</p>}
                             </div>
                             <div className="form-group col-md-12">
                                 <label style={styles.label} htmlFor="last_name">
@@ -70,7 +70,7 @@ export default function SignUp(props) {
                                     type="text"
                                     className="form-control"
                                 />
-                                {error && <p style={styles.formError}>{error.errors.last_name}</p>}
+                                {error && <p style={styles.formError}>{error.errors && error.errors.last_name}</p>}
                             </div>
                             <div className="form-group col-md-12">
                                 <label style={styles.label} htmlFor="title">Title</label>
@@ -78,7 +78,7 @@ export default function SignUp(props) {
                                     <option value="Mr">Mr</option>
                                     <option value="Ms">Ms</option>
                                 </select>
-                                {error && <p style={styles.formError}>{error.errors.title}</p>}
+                                {error && <p style={styles.formError}>{error.errors && error.errors.title}</p>}
                             </div>
                             <div className="form-group col-md-12">
                                 <label style={styles.label} htmlFor="number">
@@ -92,7 +92,7 @@ export default function SignUp(props) {
                                     type="number"
                                     className="form-control"
                                 />
-                                {error && <p style={styles.formError}>{error.errors.phone}</p>}
+                                {error && <p style={styles.formError}>{error.errors && error.errors.phone}</p>}
                             </div>
                             <div className="form-group col-md-12">
                                 <label style={styles.label} htmlFor="email">
@@ -107,9 +107,9 @@ export default function SignUp(props) {
                                     placeholder="Enter Email"
                                     className="form-control"
                                 />
-                                {error && <p style={styles.formError}>{error.errors.identifier}</p>}
-                                {error && <p style={styles.formError}>{error.errors.email}</p>}
-                                {error && <p style={styles.formError}>{error.errors.username}</p>}
+                                {error && <p style={styles.formError}>{error.errors && error.errors.identifier}</p>}
+                                {error && <p style={styles.formError}>{error.errors && error.errors.email}</p>}
+                                {error && <p style={styles.formError}>{error.errors && error.errors.username}</p>}
                             </div>
                             <div className="form-group col-md-12">
                                 <label style={styles.label} htmlFor="password">
@@ -124,7 +124,7 @@ export default function SignUp(props) {
                                     placeholder="Enter Password"
                                     className="form-control"
                                 />
-                                {error && <p style={styles.formError}>{error.errors.password}</p>}
+                                {error && <p style={styles.formError}>{error.errors && error.errors.password}</p>}
                             </div>
                             {loading ? (
                                 <div style={{display: "flex", justifyContent: "center"}}>

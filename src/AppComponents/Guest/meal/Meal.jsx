@@ -54,7 +54,7 @@ const Meal = (props) => {
                             <p className="food-list-item-1" style={{fontSize: '1.2em'}}><Naira>{props.meal.price}</Naira></p>
                         </div>
                         <div className="mt-3">
-                            <button onClick={handleClickOpenCart} className="btn btn-sm btn-danger">Add To Cart</button>
+                            <button onClick={handleClickOpenCart} style={{backgroundColor: "#FF8903", color: "white" }} className="btn btn-sm">Add To Cart</button>
                         </div>
                     </div>
                 </div>

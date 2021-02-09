@@ -14,7 +14,7 @@ const customStyles = {
       bottom                : 'auto',
       marginRight           : '-50%',
       transform             : 'translate(-50%, -50%)',
-      backgroundColor: "#B02121"
+      backgroundColor: "#ff8903"
     }
   };
 
@@ -63,7 +63,6 @@ const SuccessModal = (props) => {
         localStorage.setItem("pickup", JSON.stringify({
             location: `${data.address}, ${data.place.name}, ${data.name}`,
             code: code,
-            place: data.place.id
         }))
         setIsStep1Done(true)
     }
@@ -188,6 +187,9 @@ const SuccessModal = (props) => {
                                 )}
                                 <div className="d-flex justify-content-around align-items-center p-4">
                                     <button onClick={() => option("door_delivery")} className="btn btn-sm modal-btn">Delivery</button>
+                                    {(!isDoorDelivery || !isPickupDelivery) && (
+                                        <button onClick={() => option2("reset")} className="btn btn-sm modal-btn mr-2">Reset</button>
+                                    )}
                                     <button onClick={() => option("pickup")} className="btn btn-sm modal-btn">Pickup</button>
                                 </div>
                             </div>
@@ -196,10 +198,9 @@ const SuccessModal = (props) => {
                         <div>
                             {availableOption === "door_delivery" && !isStep1Done && (
                                 <div className="p-5">
-                                    <input
+                                    <textarea
                                         name="address"
                                         onChange={e => setAddress(e.target.value)}
-                                        type="text"
                                         className="form-control"
                                         placeholder="your delivery address"
                                         required

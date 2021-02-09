@@ -28,7 +28,7 @@ export const signin = (identifier, password) => async (dispatch) => {
 			dispatch({ type: USER_SIGNIN_FAIL, payload: data.errors });
 		}
 	} catch (error) {
-		dispatch({ type: USER_SIGNIN_FAIL, payload: error.response.data });
+		dispatch({ type: USER_SIGNIN_FAIL, payload: error.response ? error.response.data : "something went wrong" });
 	}
 };
 
@@ -49,6 +49,6 @@ export const signup = (formData) => async (dispatch) => {
 			dispatch({ type: USER_SIGNIN_FAIL, payload: data.errors });
 		}
 	} catch (error) {
-		dispatch({ type: USER_SIGNIN_FAIL, payload: error.response.data });
+		dispatch({ type: USER_SIGNIN_FAIL, payload: error.response ? error.response.data : "something went wrong" });
 	}
 };
