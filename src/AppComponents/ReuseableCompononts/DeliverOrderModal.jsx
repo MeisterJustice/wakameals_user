@@ -31,7 +31,7 @@ export default function DeliverOrderModal() {
                             <div className="form-group mt-4">
                                 <button
                                     type="button"
-                                    style={{backgroundColor: '#B02121', color: 'white'}}
+                                    style={{backgroundColor: '#ff8903', color: 'white'}}
                                     className="btn btn-warning">
                                     Send
                                 </button>

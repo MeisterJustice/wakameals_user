@@ -44,7 +44,7 @@ export default function LandingPage(props) {
     const handleChangeTab = (event, newValue) => {
         setTabValue(newValue);
     };
-
+    const [modalTime, setModalTime] = useState(false)
     const notifySuccess = (text) => toast.success(text);
     const notifyWarning = (text) => toast.warning(text);
 
@@ -60,34 +60,42 @@ export default function LandingPage(props) {
     const handleAddCart = async (data) => {
         let storedCart = localStorage.getItem("cart")
         let parsedStoredCart = JSON.stringify(storedCart)
-        if(token === undefined || token === null){
-            localStorage.setItem("cart", JSON.stringify([
-                ...initialCart,
-                {...data, name: person}
-            ]))
-        } else {
-            Axios.post("https://server.wakameals.validprofits.xyz/api/cart/new", {
-                ...data,
-                name: person ? person : "John Doe"
-            }, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                    "Content-Type": "application/json",
-                    Accept: "application/json",
-                  },
-            })
-            .then((res) => {
-                localStorage.setItem("cart", JSON.stringify([
-                    ...initialCart,
-                    {...data, name: person}
-                ]))
-                setInitialCart([
-                    ...initialCart,
-                    {...data, name: person}
-                ])
-            })
-            .catch((e) => {})
-        }
+        localStorage.setItem("cart", JSON.stringify([
+            ...initialCart,
+            {...data, name: person}
+        ]))
+        setInitialCart([
+            ...initialCart,
+            {...data, name: person}
+        ])
+        // if(token === undefined || token === null){
+        //     localStorage.setItem("cart", JSON.stringify([
+        //         ...initialCart,
+        //         {...data, name: person}
+        //     ]))
+        // } else {
+        //     Axios.post("https://server.wakameals.validprofits.xyz/api/cart/new", {
+        //         ...data,
+        //         name: person ? person : "John Doe"
+        //     }, {
+        //         headers: {
+        //             Authorization: `Bearer ${token}`,
+        //             "Content-Type": "application/json",
+        //             Accept: "application/json",
+        //           },
+        //     })
+        //     .then((res) => {
+        //         localStorage.setItem("cart", JSON.stringify([
+        //             ...initialCart,
+        //             {...data, name: person}
+        //         ]))
+        //         setInitialCart([
+        //             ...initialCart,
+        //             {...data, name: person}
+        //         ])
+        //     })
+        //     .catch((e) => {})
+        // }
         notifySuccess(`Meal added to cart`)
         setCartSize(cartSize + 1)
     }
@@ -126,6 +134,9 @@ export default function LandingPage(props) {
         .then((res) => {
             setMeals(res.data.data)
         })
+        setTimeout(() => {
+            setModalTime(true)
+        }, 10000)
         
     }, [])
 
@@ -161,7 +172,7 @@ export default function LandingPage(props) {
             <Bg />
             {!finish && (
                 <div>
-                    {states.length > 0 && !openFail && !openSuccess && open && (
+                    {states.length > 0 && modalTime && !openFail && !openSuccess && open && (
                         <WelcomeModal setLocation={setPickupLocation} setIsLuck={setIsLuck} setSuccess={setSuccess} open={open} openFail={openFail} setOpenFail={setOpenFail} openSuccess={openSuccess} setOpenSuccess={setOpenSuccess} setOpen={setOpen} states={states} {...props} />
                     )}
                     {openFail && !openSuccess && (
@@ -175,7 +186,7 @@ export default function LandingPage(props) {
             <div id="meals">
                 {/* <!--============ THE FOOD LISTING ==========--> */}
                 <div style={{width: "100%"}} className="container">
-                    <h4 className="py-5 text-center" style={{color: "#B02121"}}>{success ? persons.length > 1 ? `For ${person}` : `For Person ${step}` : ""}</h4>
+                    <h4 className="py-5 text-center" style={{color: "#ff8903"}}>{success ? persons.length > 1 ? `For ${person}` : `For Person ${step}` : ""}</h4>
                     <div className="row">
                         <div className="col-12">
                             {meals.length > 0 ? (
@@ -195,8 +206,8 @@ export default function LandingPage(props) {
                                     </div>
                                     <div className="col-lg-10">
                                         <div className="d-flex justify-content-start align-items-center pb-3">
-                                            <div className="py-3 px-5 cursor" style={{fontWeight: "bold", color: tabValue === 0 ? "#B02121" : "gray", backgroundColor: tabValue === 0 ? "white" : "transparent"}} onClick={(e) => handleChangeTab(e, 0)}><FaUtensilSpoon />  Menu</div>
-                                            <div className="py-3 px-5 cursor" style={{fontWeight: "bold", color: tabValue === 1 ? "#B02121" : "gray", backgroundColor: tabValue === 1 ? "white" : "transparent"}} onClick={(e) => handleChangeTab(e, 1)}><FaTable />  Book an Engagement</div>
+                                            <div className="py-3 px-5 cursor" style={{fontWeight: "bold", color: tabValue === 0 ? "#ff8903" : "gray", backgroundColor: tabValue === 0 ? "white" : "transparent"}} onClick={(e) => handleChangeTab(e, 0)}><FaUtensilSpoon />  Menu</div>
+                                            <div className="py-3 px-5 cursor" style={{fontWeight: "bold", color: tabValue === 1 ? "#ff8903" : "gray", backgroundColor: tabValue === 1 ? "white" : "transparent"}} onClick={(e) => handleChangeTab(e, 1)}><FaTable />  Book an Engagement</div>
                                         </div>
                                         {tabValue === 0 && (
                                             <FoodMenu notifySuccess={notifySuccess} handleAddCart={handleAddCart} person={person} meals={meals} />
@@ -215,14 +226,14 @@ export default function LandingPage(props) {
                                         <div className="mb-5">
                                             {tabValue === 0 && (
                                                 <Link to="/cart" className="nav-item">
-                                                    <button className="btn" style={{color: "white", backgroundColor: "#B02121"}}>CONTINUE TO CART</button>
+                                                    <button className="btn" style={{color: "white", backgroundColor: "#ff8903"}}>CONTINUE TO CART</button>
                                                 </Link>
                                             )}
                                         </div>
                                     </div>
                                 </div>
                             ) : (
-                                <Preloader />
+                                <Preloader home={true} />
                             )}
                             
                         </div>

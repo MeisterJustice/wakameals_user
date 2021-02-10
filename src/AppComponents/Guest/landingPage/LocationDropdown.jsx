@@ -11,6 +11,7 @@ const LocationDropdown = (props) => {
             ...selectedPlace[0]
         })
         setLoading(false)
+        localStorage.setItem("place", JSON.stringify(selectedPlace[0].id))
     }
 
     return (

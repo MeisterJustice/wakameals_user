@@ -15,7 +15,7 @@ body {
 }
 
 .navbar li a:hover {
-  color: #B02121 !important;
+  color: #ff8903 !important;
 }
 
 .navbar .mdi {
@@ -26,7 +26,7 @@ body {
 /* *========== THE FOOD LISTING======= */
 
 .food-list-accordion {
-  background: #B02121;
+  background: #ff8903;
   color: #fff;
   margin-bottom: 5px;
   margin-top: 2rem;
@@ -70,13 +70,13 @@ body {
 }
 
 .btn-style {
-  color: #B02121;
-  border: 1px #B02121 solid;
+  color: #ff8903;
+  border: 1px #ff8903 solid;
   font-size: smaller;
 }
 
 .btn-style:hover {
-  color: #B02121;
+  color: #ff8903;
 }
 
 .my-text h2 {
@@ -95,7 +95,7 @@ body {
 }
 
 .card-head {
-  background: #B02121;
+  background: #ff8903;
   color: #fff;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -107,7 +107,7 @@ body {
 }
 
 .btn-pay {
-  background: #B02121;
+  background: #ff8903;
   color: #fff;
   border: none;
 }
@@ -129,12 +129,12 @@ body {
 }
 .card-hover {
   width: 100%;
-  background-color: #B02121;
+  background-color: #ff8903;
   color: white;
 }
 
 .hover-location:hover {
-  background-color: #B02121;
+  background-color: #ff8903;
   color: rgb(143, 138, 138);
   transition: 0.2s all ease;
   border: none;
@@ -224,7 +224,7 @@ body {
 
 .order-now {
   height: 150px;
-  background-color: #B02121;
+  background-color: #ff8903;
 }
 
 .order-lg {
@@ -232,7 +232,7 @@ body {
 }
 
 .cat-title {
-  color: #B02121;
+  color: #ff8903;
   text-decoration: underline;
   line-height: 1.5;
 }
@@ -244,7 +244,7 @@ body {
 }
 
 .cat-name:hover {
-  color: #B02121;
+  color: #ff8903;
   transition: .5s all ease;
 }
 
@@ -263,11 +263,11 @@ body {
 }
 .footer1 {
   font-size: 15px;
-  color: #B02121;
+  color: #ff8903;
 }
 
 .checkout {
-  background-color: rgba(176, 33, 33, 0.4);
+  background-color: rgba(255, 137, 3, 0.4);
   box-shadow: 5px 10px #b1aeae;
 }
 

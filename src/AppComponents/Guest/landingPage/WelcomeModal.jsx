@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import LocationDropdown from "./LocationDropdown"
 import Modal from 'react-modal';
 
@@ -10,7 +10,7 @@ const customStyles = {
       bottom                : 'auto',
       marginRight           : '-50%',
       transform             : 'translate(-50%, -50%)',
-      backgroundColor: "#B02121"
+      backgroundColor: "#ff8903"
     }
   };
 
@@ -56,6 +56,7 @@ const WelcomeModal = (props) => {
                 onRequestClose={() => null}
                 style={customStyles}
                 contentLabel="Select Location"
+                
             >
                 <h6 className="modal-title white" id="myLandingModalLabel">Welcome to WakaFoods! Please choose your location</h6>
                 <div className="mt-3">

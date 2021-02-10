@@ -36,7 +36,7 @@ export default function SignIn(props) {
         <div>
             <HeaderNav />
             <div className="login container" style={{display: "flex", justifyContent: "center", alignItems: "center", width: "100%", height: "90vh"}}>
-            <div className="card border-0 shadow login-form" style={{backgroundColor: '#B02121'}}>
+            <div className="card border-0 shadow login-form" style={{backgroundColor: '#ff8903'}}>
                 <div className="card-body">
                     <from>
                         <div className="from-row">
@@ -52,10 +52,10 @@ export default function SignIn(props) {
                                     placeholder="Enter Email"
                                     className="form-control"
                                 />
-                                {error && <p style={styles.formError}>{error.errors.identifier}</p>}
-                                {error && <p style={styles.formError}>{error.errors.email}</p>}
-                                {error && <p style={styles.formError}>{error.errors.phone}</p>}
-                                {error && <p style={styles.formError}>{error.errors.username}</p>}
+                                {error && <p style={styles.formError}>{error.errors && error.errors.identifier}</p>}
+                                {error && <p style={styles.formError}>{error.errors && error.errors.email}</p>}
+                                {error && <p style={styles.formError}>{error.errors && error.errors.phone}</p>}
+                                {error && <p style={styles.formError}>{error.errors && error.errors.username}</p>}
                             </div>
                             <div className="form-group col-md-12">
                                 <label style={styles.label} htmlFor="inputCity">
@@ -69,7 +69,7 @@ export default function SignIn(props) {
                                     placeholder="Enter Password"
                                     className="form-control"
                                 />
-                                {error && <p style={styles.formError}>{error.errors.password}</p>}
+                                {error && <p style={styles.formError}>{error.errors && error.errors.password}</p>}
                             </div>
                             {loading ? (
                                 <div style={{display: "flex", justifyContent: "center"}}>

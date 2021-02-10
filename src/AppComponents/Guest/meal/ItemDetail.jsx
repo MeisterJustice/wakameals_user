@@ -38,7 +38,7 @@ export default function ItemDetail({meal, open, handleClose}) {
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                <Button onClick={handleClose} style={{color: "#B02121"}}>
+                <Button onClick={handleClose} style={{color: "#ff8903"}}>
                     CLOSE
                 </Button>
                 </DialogActions>
