@@ -12,7 +12,7 @@ export const signin = (identifier, password) => async (dispatch) => {
 	dispatch({ type: USER_SIGNIN_REQUEST, payload: { identifier, password } });
 	try {
 		const { data } = await axios.post(
-			"https://server.wakameals.validprofits.xyz/api/auth/login/default",
+			"https://server.wakafoods.com/api/auth/login/default",
 			{
 				identifier,
 				password
@@ -36,7 +36,7 @@ export const signup = (formData) => async (dispatch) => {
 	dispatch({ type: USER_SIGNIN_REQUEST, payload:  formData });
 	try {
 		const { data } = await axios.post(
-			"https://server.wakameals.validprofits.xyz/api/auth/register/default",
+			"https://server.wakafoods.com/api/auth/register/default",
 			formData
 		);
 		const token = data.token;

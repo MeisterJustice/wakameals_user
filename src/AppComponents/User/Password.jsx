@@ -27,7 +27,7 @@ export default function Password(props) {
         if(formData.new_password === formData.retype_new_password){
             let token = localStorage.getItem("token")
             let parsedToken = JSON.parse(token)
-            Axios.post("https://server.wakameals.validprofits.xyz/api/profile/password/update", formData, {
+            Axios.post("https://server.wakafoods.com/api/profile/password/update", formData, {
                 headers: {
                     Authorization: `Bearer ${parsedToken}`,
                     "Content-Type": "application/json",

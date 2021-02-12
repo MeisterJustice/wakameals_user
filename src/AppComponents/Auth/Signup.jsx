@@ -145,7 +145,10 @@ export default function SignUp(props) {
                             </div>
                             )}
                             <div className="form-group col-md-12">
-                                <Link to="/signin" className="btn" style={{color: '#023a9c', fontWeight: 'bold'}}>
+                                <Link to={{
+                                    pathname: '/signin',
+                                    state: { cart: props.location.state && props.location.state.cart ? true : false }
+                                    }} className="btn" style={{color: '#023a9c', fontWeight: 'bold'}}>
                                     Already a User? Login
                                 </Link>
                             </div>

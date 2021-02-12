@@ -47,7 +47,7 @@ export default function EditProfile() {
         form_data.append("title", formData.title)
         form_data.append("phone", formData.phone)
         form_data.append("avatar", formData.avatar)
-        Axios.post("https://server.wakameals.validprofits.xyz/api/profile/update", form_data, {
+        Axios.post("https://server.wakafoods.com/api/profile/update", form_data, {
             headers: {
                 Authorization: `Bearer ${parsedToken}`,
                 "Content-Type": "application/json",
@@ -68,7 +68,7 @@ export default function EditProfile() {
     useEffect(() => {
         let token = localStorage.getItem("token")
         let parsedToken = JSON.parse(token)
-        Axios.get("https://server.wakameals.validprofits.xyz/api/profile/details", {
+        Axios.get("https://server.wakafoods.com/api/profile/details", {
             headers: {
                 Authorization: `Bearer ${parsedToken}`,
                 "Content-Type": "application/json",

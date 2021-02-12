@@ -23,7 +23,7 @@ const CartItem = (props) => {
     const removeCart = async () => {
         setLoading(true)
         if(typeof props.token === "string"){
-            Axios.post("https://server.wakameals.validprofits.xyz/api/cart/remove", {id: props.cart.id}, {
+            Axios.post("https://server.wakafoods.com/api/cart/remove", {id: props.cart.id}, {
                 headers: {
                     Authorization: `Bearer ${props.token}`,
                     "Content-Type": "application/json",

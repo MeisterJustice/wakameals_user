@@ -39,7 +39,7 @@ const SuccessModal = (props) => {
     const [isPickupDelivery, setIsPickupDelivery] = useState(true)
 
     useEffect(() => {
-        axios.get(`https://server.wakameals.validprofits.xyz/api/avail_pickup/${props.pickupLocation.slug}/list`)
+        axios.get(`https://server.wakafoods.com/api/avail_pickup/${props.pickupLocation.slug}/list`)
         .then((res) => {
             setPickupLocation({
                 ...pickupLocation,
@@ -210,6 +210,7 @@ const SuccessModal = (props) => {
                             )}
                             {availableOption === "pickup" && !isStep1Done && (
                                 <div className="my-3">
+                                    <h5 style={{color: "white"}}>Please select a pickup location below</h5>
                                     {pickupLocation.data.map((data) => (
                                         <div key={data.id} onClick={() => handlePickup(data.code, data)} style={{border: "1px white solid", fontSize: "14px", color: "white"}} className="p-2 hover-location cursor mt-2" >
                                             {data.address}, {data.place.name}, {data.name}

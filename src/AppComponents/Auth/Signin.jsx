@@ -24,7 +24,11 @@ export default function SignIn(props) {
         dispatch(signin(identifier, password)).then(() => {}).then(() => {
                 let token = localStorage.getItem("token")
                 if(typeof token === "string"){
-                    props.history.push('/account');
+                    if(props.location.state && props.location.state.cart){
+                        props.history.push('/cart');
+                    } else {
+                        props.history.push('/account');
+                    }
                 }
 
         })
@@ -89,7 +93,10 @@ export default function SignIn(props) {
                                 </button>
                             </div>
                             )}
-                            <Link to="/signup" className="form-group col-md-12">
+                            <Link to={{
+                                    pathname: '/signup',
+                                    state: { cart: props.location.state && props.location.state.cart ? true : false }
+                                    }} className="form-group col-md-12">
                                 <p className="btn" style={{color: '#023a9c', fontWeight: 'bold'}}>
                                     Not Registered?
                                 </p>
