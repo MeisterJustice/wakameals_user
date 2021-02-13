@@ -29,7 +29,7 @@ function App(props) {
                 return <LandingPage {...props} />;
               }}
             />
-            <Route {...props} exact path="/checkout" component={WithAuth(Checkout)} />
+            <Route cart={true} {...props} exact path="/checkout" component={WithAuth(Checkout)} />
             <Route {...props} exact path="/account" component={WithAuth(Dashboard)} />
             <Route {...props} exact path="/account/edit" component={WithAuth(EditProfile)} />
             <Route {...props} exact path="/account/open" component={WithAuth(OpenOder)} />

@@ -18,7 +18,7 @@ export default function OpenOder() {
     useEffect(() => {
         let token = localStorage.getItem("token")
         let parsedToken = JSON.parse(token)
-        Axios.get("https://server.wakameals.validprofits.xyz/api/order/list/open", {
+        Axios.get("https://server.wakafoods.com/api/order/list/open", {
             headers: {
                 Authorization: `Bearer ${parsedToken}`,
                 "Content-Type": "application/json",

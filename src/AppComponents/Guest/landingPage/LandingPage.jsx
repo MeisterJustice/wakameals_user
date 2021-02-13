@@ -74,7 +74,7 @@ export default function LandingPage(props) {
         //         {...data, name: person}
         //     ]))
         // } else {
-        //     Axios.post("https://server.wakameals.validprofits.xyz/api/cart/new", {
+        //     Axios.post("https://server.wakafoods.com/api/cart/new", {
         //         ...data,
         //         name: person ? person : "John Doe"
         //     }, {
@@ -125,12 +125,12 @@ export default function LandingPage(props) {
         //     setOpenSuccess(true)
         //     setOpen(false)
         // } 
-        Axios.get("https://server.wakameals.validprofits.xyz/api/place/list")
+        Axios.get("https://server.wakafoods.com/api/place/list")
         .then((res) => {
             setStates(res.data.places)
         })
 
-        Axios.get("https://server.wakameals.validprofits.xyz/api/meal/list")
+        Axios.get("https://server.wakafoods.com/api/meal/list")
         .then((res) => {
             setMeals(res.data.data)
         })

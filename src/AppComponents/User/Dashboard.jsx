@@ -10,7 +10,7 @@ export default function Dashboard() {
     useEffect(() => {
         let token = localStorage.getItem("token")
         let parsedToken = JSON.parse(token)
-        Axios.get("https://server.wakameals.validprofits.xyz/api/profile/details", {
+        Axios.get("https://server.wakafoods.com/api/profile/details", {
             headers: {
                 Authorization: `Bearer ${parsedToken}`,
                 "Content-Type": "application/json",
@@ -29,7 +29,7 @@ export default function Dashboard() {
             <div className="user-dashboard mt-5">
                 <div className="text-center">
                     <img  alt="photo" src={user.avatar === null ? "https://t4.ftcdn.net/jpg/03/46/93/61/360_F_346936114_RaxE6OQogebgAWTalE1myseY1Hbb5qPM.jpg" : user.avatar} className="rounded-circle" style={{height: '200px', width: '200px', objectFit: "cover"}} />
-                    <h5 style={{color: 'white', fontWeight: 'bold', marginTop: '10px'}}>{user.first_name} {user.last_name}</h5>
+                    <h5 style={{fontWeight: 'bold', marginTop: '10px'}}>{user.first_name} {user.last_name}</h5>
                 </div>
                 <div className="container">
                 <div className="row">

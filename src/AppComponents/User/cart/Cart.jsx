@@ -41,7 +41,7 @@ const Cart = (props) => {
         }
         if(parsedCartItem !== undefined){
             if(typeof parsedToken === "string"){
-                Axios.post("https://server.wakameals.validprofits.xyz/api/cart/sync", {items: parsedCartItem}, {
+                Axios.post("https://server.wakafoods.com/api/cart/sync", {items: parsedCartItem}, {
                     headers: {
                         Authorization: `Bearer ${parsedToken}`,
                         "Content-Type": "application/json",
@@ -57,7 +57,7 @@ const Cart = (props) => {
                     
                 })
             } else {
-                Axios.post("https://server.wakameals.validprofits.xyz/api/cart/sync", {items: parsedCartItem})
+                Axios.post("https://server.wakafoods.com/api/cart/sync", {items: parsedCartItem})
                 .then((res) => {
                     setCart(res.data.cart.items)
                     setItem(res.data.cart)

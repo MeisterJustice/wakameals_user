@@ -73,7 +73,7 @@ const Checkout = (props) => {
             email: "",
             order_codes: []
         },
-        publicKey: 'pk_test_56a49c6ffaa3261f532935c213cb8bb2c714cb9b',
+        publicKey: 'pk_live_09c5cb5a0db47dbe7a2c4488bb27fbb6f2f3109c',
     })
     const [user, setUser] = useState({
         first_name: "",
@@ -140,7 +140,7 @@ const Checkout = (props) => {
         //     notifyWarning("address must not be empty")
         //     setLoadOrder(false)
         // }
-        Axios.post("https://server.wakameals.validprofits.xyz/api/order/new", {
+        Axios.post("https://server.wakafoods.com/api/order/new", {
             delivery_type: selected,
             pickup_code: pickupLocation.code,
             place: placeId,
@@ -183,7 +183,7 @@ const Checkout = (props) => {
         localStorage.removeItem("cart")
         setOpen1(false)
         setLoading(true)
-        Axios.get(`https://server.wakameals.validprofits.xyz/api/order/verify_payment?trxref=${config.reference}`, {
+        Axios.get(`https://server.wakafoods.com/api/order/verify_payment?trxref=${config.reference}`, {
             headers: {
                 Authorization: `Bearer ${parsedToken}`,
                 "Content-Type": "application/json",
@@ -194,13 +194,13 @@ const Checkout = (props) => {
             setLoading(false)
             notifySuccess("Order completed and payment successful")
             setOpen1(false)
-            history.push("/")
+            history.push("/account/open")
         })
       };
     
       // you can call this function anything
       const onClose = () => {
-        Axios.get(`https://server.wakameals.validprofits.xyz/api/order/verify_payment?trxref=${config.reference}`)
+        Axios.get(`https://server.wakafoods.com/api/order/verify_payment?trxref=${config.reference}`)
         .then(() => {
             notifyWarning("Could not complete payment")
             setOpen1(false)
@@ -289,7 +289,7 @@ const Checkout = (props) => {
         }
         setSelected(parsedOption)
         setCart(parsedCart)
-        Axios.get("https://server.wakameals.validprofits.xyz/api/profile/details", {
+        Axios.get("https://server.wakafoods.com/api/profile/details", {
             headers: {
                 Authorization: `Bearer ${parsedToken}`,
                 "Content-Type": "application/json",
