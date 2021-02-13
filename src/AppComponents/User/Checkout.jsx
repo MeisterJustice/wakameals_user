@@ -321,6 +321,16 @@ const Checkout = (props) => {
     }, [])
 
     const initializePayment = usePaystackPayment(config);
+    const PaystackPay = () => {
+        const initializePayment = usePaystackPayment(config);
+        return (
+          <div>
+              <button className="btn btn-lg btn-block" style={{backgroundColor: "#ff8903", border: "none", color: "white", fontWeight: "bold"}} onClick={() => {
+                initializePayment(onSuccess, onClose)
+            }}>CONTINUE TO PAYMENT</button>
+          </div>
+        );
+    };
 
     return (
         <div>
@@ -341,6 +351,13 @@ const Checkout = (props) => {
             
             <div className="my-5 container checkout-container">
                 <div style={{height: "100%"}} className="row d-flex justify-content-center align-items-center">
+                    {open1 ? (
+                        <div style={{display: "flex", justifyContent: "center", alignItems: "center"}} className="mt-3">
+                            <PaystackPay />
+                        </div>
+                    ) : (
+
+                        <div style={{height: "100%"}} className="row d-flex justify-content-center align-items-center">
                     <div className="col-lg-8 checkout p-2 shadow px-2 py-4">
                         <div className="container">
                             <h5>Delivery Summary</h5>
@@ -393,59 +410,7 @@ const Checkout = (props) => {
                     </div>
                     <div className="col-lg-3 mt-3 mt-lg-0 p-2">
                         <div>
-                            {/* <h5>Order Options</h5>
-                            <hr className="mt-3" />
-                            <div className="mt-2 p-1" style={{display: "flex", alignItems: "center", border: "1px solid gray"}}>
-                                <Checkbox
-                                    checked={checked}
-                                    onChange={handleChange}
-                                    inputProps={{ 'aria-label': 'primary checkbox' }}
-                                />
-                                <div className="ml-2">Add to reoccuring order?</div>
-                            </div> */}
-                            {/* {checked && (
-                                <div className="mt-3">
-                                    <h6 style={{color: "#ff8903"}}>Choose delivery days</h6>
-                                    <hr className="mt-2" />
-                                    {days.map((data, index) => (
-                                        <div className="mt-1 p-1" style={{display: "flex", alignItems: "center", border: "1px solid gray"}}>
-                                            <Checkbox
-                                                checked={
-                                                    data === 1 ? checkedMonday.status : data === 2 ? checkedTuesday.status : data === 3 ? checkedWednesday.status : data === 4 ? checkedThursday.status : data === 5 ? checkedFriday.status : data === 6 ? checkedSaturday.status : checkedSunday.status
-                                                }
-                                                onChange={(e) =>
-                                                    data === 1 ? handleChangeMonday(e, date.addDays(1)) : data === 2 ? handleChangeTuesday(e, date.addDays(2)) : data === 3 ? handleChangeWednesday(e, date.addDays(3)) : data === 4 ? handleChangeThursday(e, date.addDays(4)) : data === 5 ? handleChangeFriday(e, date.addDays(5)) : data === 6 ? handleChangeSaturday(e, date.addDays(6)) : handleChangeSunday(e, date.addDays(7))
-                                                }
-                                                inputProps={{ 'aria-label': 'primary checkbox' }}
-                                            />
-                                            <div style={{fontSize: "13px"}} className="ml-2">
-                                                <Moment format="YYYY/MM/DD">
-                                                    {date.addDays(data)}
-                                                </Moment>
-                                            </div>
-                                        </div>
-                                    ))}
-                                    <div className="mt-2">
-                                        <h6 style={{color: "#ff8903"}}>Choose delivery times (7:05 AM to 5:15 PM</h6>
-                                        <div style={{fontSize: "13px"}}>First Time (Leave empty if not applicable)</div>
-                                        <input
-                                            name="first_time"
-                                            onChange={e => setFirstTime(e.target.value)}
-                                            type="time"
-                                            className="form-control"
-                                        />
-                                    </div>
-                                    <div className="mt-2">
-                                        <div style={{fontSize: "13px"}}>Second Time (Leave empty if not applicable)</div>
-                                        <input
-                                            name="second_time"
-                                            onChange={e => setSecondTime(e.target.value)}
-                                            type="time"
-                                            className="form-control"
-                                        />
-                                    </div>
-                                </div>
-                            )} */}
+                          
                             {loadOrder ? (
                                 <div style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
                                     <div className="spinner-grow" role="status">
@@ -460,60 +425,14 @@ const Checkout = (props) => {
                             )}
                         </div>
                     </div>
+                    </div>
+                    )}
                 </div>
             </div>
             )}
-            {/* FOR PICKUP LOCATION SELECTION */}
-            {/* <Dialog
-                fullWidth
-                open={open}
-                aria-labelledby="alert-dialog-title"
-                aria-describedby="alert-dialog-cart"
-            >
-                <DialogTitle id="alert-dialog-title">
-                    <h6 style={{color: '#ff8903'}} className="modal-title" id="exampleModalCenterTitle">
-                        Select Location
-                    </h6>
-                </DialogTitle>
-                <DialogContent>
-                    <DialogContentText id="alert-dialog-cart">                                
-                        <div>
-                            {pickupLocation.data.map((data) => (
-                                <div key={data.id} onClick={() => handlePickup(data.code, data)} style={{border: "1px gray solid", fontSize: "14px"}} className="p-2 hover-location cursor mt-2" >
-                                    {data.address}, {data.place.name}, {data.name}
-                                </div>
-                            ))}
-                        </div>
-                    </DialogContentText>
-                </DialogContent>
-                <DialogActions>
-                <Button onClick={handleClose} style={{color: "#ff8903", fontWeight: "550"}}>
-                    CLOSE
-                </Button>
-                </DialogActions>
-            </Dialog> */}
 
 
-            {/* PAYMENT */}
-            <Dialog
-                fullWidth
-                open={open1}
-                aria-labelledby="alert-dialog-title"
-                aria-describedby="alert-dialog-cart"
-            >
-                <DialogTitle id="alert-dialog-title">
-                    
-                </DialogTitle>
-                <DialogContent>
-                    <DialogContentText id="alert-dialog-cart">                                
-                        <div style={{display: "flex", justifyContent: "center", alignItems: "center"}} className="mt-3">
-                            <button className="btn btn-lg btn-block" style={{backgroundColor: "#ff8903", border: "none", color: "white", fontWeight: "bold"}} onClick={() => {
-                                initializePayment(onSuccess, onClose)
-                            }}>CONTINUE TO PAYMENT</button>
-                        </div>
-                    </DialogContentText>
-                </DialogContent>
-            </Dialog>
+            
         </div>
     )
 }
