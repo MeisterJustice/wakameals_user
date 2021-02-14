@@ -58,6 +58,9 @@ export default function LandingPage(props) {
     }
 
     const handleAddCart = async (data) => {
+        if(person.length === 0){
+            return;
+        }
         let storedCart = localStorage.getItem("cart")
         let parsedStoredCart = JSON.stringify(storedCart)
         localStorage.setItem("cart", JSON.stringify([
