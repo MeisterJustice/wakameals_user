@@ -164,13 +164,13 @@ const SuccessModal = (props) => {
                             {isDoorDelivery && (
                                 <div>
                                     {!props.isLuck ? (
-                                        <div className="py-5 white">
+                                        <div className="py-5 white text-big">
                                             Choose an option below……
                                         </div>
                                     ) : (
                                         <div>
                                             {isPickupDelivery && (
-                                                <div className="py-5 white">
+                                                <div className="py-5 white text-big">
                                                     Wow! you are in luck, choose an option below……
                                                 </div> 
                                             )}
@@ -180,10 +180,10 @@ const SuccessModal = (props) => {
                             )}
                             <div>
                                 {!isDoorDelivery && (
-                                    <p style={{color: "white"}}>Delivery Option isn't available in your location yet. Please select another option</p>
+                                    <p style={{color: "white text-big"}}>Oops! WakaFoods is coming to your city soon. Order for a friend or relative in another city</p>
                                 )}
                                 {!isPickupDelivery && (
-                                    <p style={{color: "white"}}>Pickup Option isn't available in your location yet. Please select another option</p>
+                                    <p style={{color: "white text-big"}}>Oops! WakaFoods is coming to your city soon. Order for a friend or relative in another city</p>
                                 )}
                                 <div className="d-flex justify-content-around align-items-center p-4">
                                     <button onClick={() => option("door_delivery")} className="btn btn-sm modal-btn">Delivery</button>
@@ -199,6 +199,7 @@ const SuccessModal = (props) => {
                             {availableOption === "door_delivery" && !isStep1Done && (
                                 <div className="p-5">
                                     <textarea
+                                        type="address"
                                         name="address"
                                         onChange={e => setAddress(e.target.value)}
                                         className="form-control"
@@ -210,7 +211,7 @@ const SuccessModal = (props) => {
                             )}
                             {availableOption === "pickup" && !isStep1Done && (
                                 <div className="my-3">
-                                    <h5 style={{color: "white"}}>Please select a pickup location below</h5>
+                                    <h5 className="white text-big mb-3">Please select a pickup location below</h5>
                                     {pickupLocation.data.map((data) => (
                                         <div key={data.id} onClick={() => handlePickup(data.code, data)} style={{border: "1px white solid", fontSize: "14px", color: "white"}} className="p-2 hover-location cursor mt-2" >
                                             {data.address}, {data.place.name}, {data.name}
@@ -221,7 +222,7 @@ const SuccessModal = (props) => {
                             )}
                             {isStep1Done && (
                                 <div className="p-2">
-                                    <p style={{color: "white"}}>Great! {delivery} option is available in your location. Press reset to restart the checker or continue with your order...</p>
+                                    <p className="white text-big">Great! {delivery} option is available in your location. Press reset to restart the checker or continue with your order...</p>
                                     <div className="p-4 d-flex justify-content-around align-items-center">
                                         <button onClick={() => option2("reset")} className="btn btn-sm modal-btn mr-2">Reset</button>
                                         <button onClick={() => option2("continue")} className="btn btn-sm modal-btn">Continue</button>
@@ -234,7 +235,7 @@ const SuccessModal = (props) => {
             )}
             {step === 2 && (
                 <div>
-                    <div className="py-3 white">
+                    <div className="py-3 white text-big">
                         How many persons are you ordering for?
                     </div>
                     <div>
@@ -246,18 +247,18 @@ const SuccessModal = (props) => {
             )}
             {step === 3 && number > 1 && (
                 <div>
-                    <div className="py-3 white">
+                    <div className="py-3 white text-big">
                         Click the button below to customise your orders
                     </div>
                     <div>
                         {/* <button onClick={done1} className="btn btn-primary mt-4">No</button> */}
-                        <button onClick={() => setStep(4)} className="btn modal-btn mt-4 ml-2">CUSTOMISE</button>
+                        <button onClick={() => setStep(4)} className="btn modal-btn mt-4 ml-2 text-big">CUSTOMISE</button>
                     </div>
                 </div>
             )}
             {step === 4 && (
                 <div style={{height: "70vh", overflowY: "scroll"}} className="pl-2 pr-4">
-                    <h4 className="white">Please enter the name of the {number} persons</h4>
+                    <h4 className="white text-big">Please enter the name of the {number} persons</h4>
                     {numberOfPersons.map((data, index) => (
                         <div className="mt-2">
                             <label className="white">Person {data}</label>

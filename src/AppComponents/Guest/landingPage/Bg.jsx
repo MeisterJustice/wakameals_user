@@ -7,14 +7,13 @@ const Bg = () => {
     const [open3, setOpen3] = useState(false)
 
     return (
-        <div>
+        <div id="bgg">
             <div id="bgImage">
                 <div className="d-flex bg-wrapper flex-column justify-content-center align-items-center">
                     <h1>
-                        <div className="text-center">WELCOME TO WAKAFOODS</div>
-                        <div className="text-center">Your No 1 Online Restaurant</div>
+                        <div className="text-center text-sw">WELCOME TO WAKAFOODS</div>
+                        <div className="text-center text-sw font-italic">Your No 1 Online Restaurant</div>
                     </h1>
-                    <h5 className="mt-2">Good Food Is Coming Your Way</h5>
                     <div className="mt-5 d-flex flex-row justify-content-center align-items-center">
                         <div className="mx-4">
                             <div className="text-center muted muted1">{open1 ? "Opening Time  8:00 Am" : ""}</div>
@@ -23,7 +22,7 @@ const Bg = () => {
                             </div>
                         </div>
                         <div className="mx-4">
-                            <div className="text-center muted muted2">{ open2 ? "0913333360" : "" }</div>
+                            <div className="text-center muted muted2">{ open2 ? "09133333360" : "" }</div>
                             <div onMouseEnter={() => setOpen2(true)} onMouseLeave={() => setOpen2(false)} className="icon-wrapper2 d-flex">
                                 <FaPhone color="white" size="30px" />
                             </div>
@@ -40,8 +39,8 @@ const Bg = () => {
             <div className="order-now">
                 <div style={{height: "100%"}} className="container d-flex flex-column flex-lg-row justify-content-lg-between justify-content-around align-items-center">
                     <div className="text-white">
-                        <div style={{fontSize: "29px", fontWeight: "bold", lineHeight: "1"}}>IT'S VALENTINE NOW. ORDER FOR YOUR LOVED ONES FROM ANY CITY IN NIGERIA</div>
-                        <div className="mt-1">The first 50 persons to get an added FREE Meal Pack</div>
+                        <div style={{fontSize: "29px", fontWeight: "bold", lineHeight: "1"}}>Celebrate Everyday With WakaFoods Express At Home Or Office....We Move</div>
+                        <div className="mt-1">Good Food Coming Your Way</div>
                     </div>
                     <div className="d-lg-none" style={{width: "100%"}}>
                         <a style={{backgroundColor: "white", color: "#ff8903", fontWeight: "bold"}} href="#meals" className="btn btn-lg btn-block">ORDER NOW</a>

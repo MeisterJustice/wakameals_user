@@ -38,7 +38,7 @@ const Meal = (props) => {
                                 />
                             </div>
                             <div style={{width: "100%"}} className="col-lg-9">
-                                <div className="food-desc">{props.meal.name}</div>
+                                <div style={{fontSize: "17px"}} className="food-desc">{props.meal.name}</div>
                                 <div className="food-desc mute mt-1">{parse(props.meal.description)}</div>
                                 {/* <button 
                                     className="btn btn-style btn-sm"

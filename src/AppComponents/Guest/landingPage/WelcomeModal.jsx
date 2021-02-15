@@ -58,7 +58,7 @@ const WelcomeModal = (props) => {
                 contentLabel="Select Location"
                 
             >
-                <h6 className="modal-title white" id="myLandingModalLabel">Welcome to WakaFoods! Please choose your location</h6>
+                <h6 className="modal-title white text-big" id="myLandingModalLabel">Welcome to WakaFoods! Please choose your location</h6>
                 <div className="mt-3">
                     <LocationDropdown {...props} openFail={props.openFail} setOpenFail={props.setOpenFail} openSuccess={props.openSuccess} setOpenSuccess={props.setOpenSuccess} place={place} setPlace={setPlace} />
                     <div className="py-2">
