@@ -24,7 +24,7 @@ const LocationDropdown = (props) => {
                 </div>
             ) : (
                 <div>
-                    <label htmlFor="locationDropdown" className="white">Select Location</label>
+                    <label htmlFor="locationDropdown" className="white text-big">Select Location</label>
                         <select className="form-control cursor" onChange={onChange}>
                             <option value="">Pick a city...</option>
                             {props.states.map((data) => (

@@ -27,7 +27,7 @@ export default function SignIn(props) {
                     if(props.location.state && props.location.state.cart){
                         props.history.push('/cart');
                     } else {
-                        props.history.push('/account');
+                        props.history.push('/');
                     }
                 }
 

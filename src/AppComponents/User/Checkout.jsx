@@ -371,7 +371,7 @@ const Checkout = (props) => {
                                         <hr className="mt-2" />
                                         <div className="mt-2">
                                             <div style={{fontSize: "15px"}}>
-                                                <MdPerson style={{color: "#ff8903", fontSize: "17px"}}/>{`   ${user.title} ${user.first_name} ${user.last_name}`}
+                                                <MdPerson style={{color: "#ff8903", fontSize: "17px"}}/>{`${user.first_name} ${user.last_name}`}
                                             </div>
                                             <div className="mt-2" style={{fontSize: "15px"}}>
                                                 <MdPhoneAndroid style={{color: "#ff8903", fontSize: "17px"}}/>{`   ${user.phone}`}

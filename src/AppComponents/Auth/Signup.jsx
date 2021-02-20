@@ -14,7 +14,7 @@ export default function SignUp(props) {
         password: '',
         first_name: "",
         last_name: "",
-        title: "",
+        title: "Mr",
         phone: "",
     });
 
@@ -28,7 +28,7 @@ export default function SignUp(props) {
         dispatch(signup(formData)).then(() => {}).then(() => {
                 let token = localStorage.getItem("token")
                 if(typeof token === "string"){
-                    props.history.push('/account');
+                    props.history.push('/');
                 }
 
         })
@@ -72,14 +72,14 @@ export default function SignUp(props) {
                                 />
                                 {error && <p style={styles.formError}>{error.errors && error.errors.last_name}</p>}
                             </div>
-                            <div className="form-group col-md-12">
+                            {/* <div className="form-group col-md-12">
                                 <label style={styles.label} htmlFor="title">Title</label>
                                 <select value={title} id="title" name="title" onChange={e => onChangeHandler(e)} className="form-control" id="title">
                                     <option value="Mr">Mr</option>
                                     <option value="Ms">Ms</option>
                                 </select>
                                 {error && <p style={styles.formError}>{error.errors && error.errors.title}</p>}
-                            </div>
+                            </div> */}
                             <div className="form-group col-md-12">
                                 <label style={styles.label} htmlFor="number">
                                     Phone Number

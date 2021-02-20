@@ -47,6 +47,10 @@ body {
   font-size: 15px;
 }
 
+.suc p, .suc div {
+  font-size: 16px;
+}
+
 .mute {
   color: gray;
 }
@@ -153,12 +157,15 @@ body {
   margin-left: 10px;
 }
 
+.text-big {
+  font-size: 1.1em;
+}
 
 #bgImage {
   margin: 0;
   height: 90vh;
   width: 90wh;
-  background: url(http://wakameals.com/wp-content/uploads/2018/10/single-foodbakery-demo.jpg) no-repeat center / cover;
+  background: url("banner.jpg") no-repeat center / cover;
 }
 
 .bg-wrapper {
@@ -173,6 +180,9 @@ body {
 @media only screen and (max-width: 600px) {
   .bg-wrapper h1 div {
     font-size: 30px;
+  }
+  #bgImage {
+    background: url("bannerMobile.jpg") no-repeat center / cover;
   }
 }
 .icon-wrapper1 {
@@ -206,7 +216,7 @@ body {
   font-size: 13px;
   color: rgb(245, 244, 244);
   position: absolute;
-  top: 65%;
+  top: 61%;
   padding-right: 5px;
   padding-left: 5px;
   border-radius: 20px;
@@ -279,16 +289,46 @@ body {
   width: 60%;
 }
 
+@media only screen and (max-width: 1030px) {
+  .muted {
+    top: 51%;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .muted {
+    top: 53%;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .muted {
+    top: 56%;
+  }
+}
+
 @media only screen and (max-width: 400px) {
   .checkout-container{
     height: 80vh;
   }
   .muted {
-    top: 61%;
+    top: 60%;
   }
   .order-now {
     height: 220px;
     width: 100%;
+  }
+}
+
+@media only screen and (max-width: 350px) {
+  .muted {
+    top: 53%;
+  }
+}
+
+@media only screen and (max-width: 325px) {
+  .muted {
+    top: 73%;
   }
 }
 
