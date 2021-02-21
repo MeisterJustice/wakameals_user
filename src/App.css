@@ -158,7 +158,7 @@ body {
 }
 
 .text-big {
-  font-size: 1.1em;
+  font-size: 1.4em;
 }
 
 #bgImage {
@@ -166,6 +166,10 @@ body {
   height: 90vh;
   width: 90wh;
   background: url("banner.jpg") no-repeat center / cover;
+}
+
+.center {
+  text-align: center;
 }
 
 .bg-wrapper {
