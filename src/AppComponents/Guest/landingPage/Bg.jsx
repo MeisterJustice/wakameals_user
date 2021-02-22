@@ -24,7 +24,9 @@ const Bg = () => {
                         <div className="mx-4">
                             <div className="text-center muted muted2">{ open2 ? "09133333360" : "" }</div>
                             <div onMouseEnter={() => setOpen2(true)} onMouseLeave={() => setOpen2(false)} className="icon-wrapper2 d-flex">
-                                <FaPhone color="white" size="30px" />
+                                <a href="tel:09133333360">
+                                    <FaPhone color="white" size="30px" />
+                                </a>
                             </div>
                         </div>
                         <div className="mx-4">
@@ -39,8 +41,9 @@ const Bg = () => {
             <div className="order-now">
                 <div style={{height: "100%"}} className="container d-flex flex-column flex-lg-row justify-content-lg-between justify-content-around align-items-center">
                     <div className="text-white">
-                        <div style={{fontSize: "29px", fontWeight: "bold", lineHeight: "1"}}>Celebrate Everyday With WakaFoods Express At Home Or Office....We Move</div>
-                        <div className="mt-1">Good Food Coming Your Way</div>
+                        <div style={{fontSize: "29px", fontWeight: "bold", lineHeight: "1"}}>CELEBRATE EVERYDAY...</div>
+                        <div style={{fontSize: "29px", fontWeight: "bold", lineHeight: "1"}}>With WAKAFOODS HOT MEALS At Home, Office or Work site</div>
+                        <div style={{fontSize: "1.2em", fontStyle: "italic"}} className="mt-1">Good Food Coming Your Way</div>
                     </div>
                     <div className="d-lg-none" style={{width: "100%"}}>
                         <a style={{backgroundColor: "white", color: "#ff8903", fontWeight: "bold"}} href="#meals" className="btn btn-lg btn-block">ORDER NOW</a>

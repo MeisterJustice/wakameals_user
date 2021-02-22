@@ -46,9 +46,15 @@ const SuccessModal = (props) => {
                 data: res.data.pickup_locations
             })
         })
+
+        setIsDoorDelivery(props.pickupLocation.delivery_available)
+        setIsPickupDelivery(props.pickupLocation.pickup_available)
     }, [])
 
     const handleAddress = () => {
+        if(address.length === 0){
+            return;
+        }
         localStorage.setItem("door_delivery", JSON.stringify(address))
         setIsStep1Done(true)
     }
@@ -161,17 +167,36 @@ const SuccessModal = (props) => {
                 <div>
                     {!isoptionAvailable ? (
                         <div>
-                            {isDoorDelivery && (
+                            {(!isDoorDelivery && !isPickupDelivery) ? (
+                                <div className="p-3">
+                                    <div className="white text-big center px-lg-5">
+                                        Oops! WakaFoods is coming to your city soon.
+                                    </div> 
+                                    <div className="white text-big center px-lg-5">
+                                       Order for a friend or relative in another city.
+                                    </div> 
+                                    <div className="mt-5">
+                                        <button onClick={() => option2("reset")} className="mx-lg-5 btn btn-sm modal-btn mr-2">Choose another city</button>
+                                    </div>
+                                </div>
+                            ) : (
+                                <div>
+                                    {isDoorDelivery && (
                                 <div>
                                     {!props.isLuck ? (
-                                        <div className="py-5 white text-big">
+                                        <div className="py-5 white text-big center px-2">
                                             Choose an option below……
                                         </div>
                                     ) : (
                                         <div>
                                             {isPickupDelivery && (
-                                                <div className="py-5 white text-big">
-                                                    Wow! you are in luck, choose an option below……
+                                                <div className="py-3 px-lg-4">
+                                                    <div className="white text-big center px-2">
+                                                    Wow! you are in luck.
+                                                    </div>
+                                                    <div className="white text-big center px-2">
+                                                    choose an option below……
+                                                    </div>
                                                 </div> 
                                             )}
                                         </div>
@@ -180,10 +205,10 @@ const SuccessModal = (props) => {
                             )}
                             <div>
                                 {!isDoorDelivery && (
-                                    <p style={{color: "white text-big"}}>Oops! WakaFoods is coming to your city soon. Order for a friend or relative in another city</p>
+                                    <p style={{color: "white text-big center"}}>Oops! Door delivery is not available in your city. Reset to order for a friend or relative in another city or choose another option.</p>
                                 )}
                                 {!isPickupDelivery && (
-                                    <p style={{color: "white text-big"}}>Oops! WakaFoods is coming to your city soon. Order for a friend or relative in another city</p>
+                                    <p style={{color: "white text-big center"}}>Oops! Pickup is not available in your city. Reset to order for a friend or relative in another city or choose another option.</p>
                                 )}
                                 <div className="d-flex justify-content-around align-items-center p-4">
                                     <button onClick={() => option("door_delivery")} className="btn btn-sm modal-btn">Delivery</button>
@@ -193,25 +218,29 @@ const SuccessModal = (props) => {
                                     <button onClick={() => option("pickup")} className="btn btn-sm modal-btn">Pickup</button>
                                 </div>
                             </div>
+                                </div>
+                            )}
+                            
                         </div>
                     ) : (
                         <div>
                             {availableOption === "door_delivery" && !isStep1Done && (
                                 <div className="p-5">
-                                    <textarea
+                                    <label style={{opacity: 0}} htmlFor="address">Address</label>
+                                    <input
+                                        id="address"
                                         type="address"
                                         name="address"
                                         onChange={e => setAddress(e.target.value)}
                                         className="form-control"
                                         placeholder="your delivery address"
-                                        required
                                     />
                                     <button onClick={handleAddress} className="btn btn-sm modal-btn mt-2">Continue</button>
                                 </div>
                             )}
                             {availableOption === "pickup" && !isStep1Done && (
                                 <div className="my-3">
-                                    <h5 className="white text-big mb-3">Please select a pickup location below</h5>
+                                    <h5 className="white text-big mb-3 center">Please select a pickup location below</h5>
                                     {pickupLocation.data.map((data) => (
                                         <div key={data.id} onClick={() => handlePickup(data.code, data)} style={{border: "1px white solid", fontSize: "14px", color: "white"}} className="p-2 hover-location cursor mt-2" >
                                             {data.address}, {data.place.name}, {data.name}
@@ -222,7 +251,8 @@ const SuccessModal = (props) => {
                             )}
                             {isStep1Done && (
                                 <div className="p-2">
-                                    <p className="white text-big">Great! {delivery} option is available in your location. Press reset to restart the checker or continue with your order...</p>
+                                    <div className="white text-big center">Great! {delivery} option is available in your location.</div>
+                                    <div className="white text-big center">Press reset to restart the checker or continue with your order...</div>
                                     <div className="p-4 d-flex justify-content-around align-items-center">
                                         <button onClick={() => option2("reset")} className="btn btn-sm modal-btn mr-2">Reset</button>
                                         <button onClick={() => option2("continue")} className="btn btn-sm modal-btn">Continue</button>
@@ -235,7 +265,7 @@ const SuccessModal = (props) => {
             )}
             {step === 2 && (
                 <div>
-                    <div className="py-3 white text-big">
+                    <div className="py-3 white text-big center">
                         How many persons are you ordering for?
                     </div>
                     <div>
