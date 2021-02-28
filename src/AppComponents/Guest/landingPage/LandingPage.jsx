@@ -58,47 +58,19 @@ export default function LandingPage(props) {
     }
 
     const handleAddCart = async (data) => {
-        if(person.length === 0){
-            return;
-        }
+        // if(person.length === 0){
+        //     return;
+        // }
         let storedCart = localStorage.getItem("cart")
         let parsedStoredCart = JSON.stringify(storedCart)
         localStorage.setItem("cart", JSON.stringify([
             ...initialCart,
-            {...data, name: person}
+            {...data, name: person.length > 0 ? person : "user"}
         ]))
         setInitialCart([
             ...initialCart,
-            {...data, name: person}
+            {...data, name: person.length > 0 ? person : "user"}
         ])
-        // if(token === undefined || token === null){
-        //     localStorage.setItem("cart", JSON.stringify([
-        //         ...initialCart,
-        //         {...data, name: person}
-        //     ]))
-        // } else {
-        //     Axios.post("https://server.wakafoods.com/api/cart/new", {
-        //         ...data,
-        //         name: person ? person : "John Doe"
-        //     }, {
-        //         headers: {
-        //             Authorization: `Bearer ${token}`,
-        //             "Content-Type": "application/json",
-        //             Accept: "application/json",
-        //           },
-        //     })
-        //     .then((res) => {
-        //         localStorage.setItem("cart", JSON.stringify([
-        //             ...initialCart,
-        //             {...data, name: person}
-        //         ]))
-        //         setInitialCart([
-        //             ...initialCart,
-        //             {...data, name: person}
-        //         ])
-        //     })
-        //     .catch((e) => {})
-        // }
         notifySuccess(`Meal added to cart`)
         setCartSize(cartSize + 1)
     }
